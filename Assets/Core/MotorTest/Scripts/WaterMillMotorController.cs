@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Helpers;
 using LEGOWirelessSDK;
 using UnityEngine;
 
@@ -33,59 +35,22 @@ namespace Core.MotorTest.Scripts
         void WaitForInitialize(Action tachoMotorInitializedEvent);
     }
 
-    public class MotorRecordings
-    {
-        public int AverageMovement => GetAverageMovement();
-        private int idx = 0;
-        private int[] recordedMotorMovement = new [] {
-            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-        };
-        private int GetAverageMovement()
-        {
-            int sum = 0;
-            foreach (var record in recordedMotorMovement)
-            {
-                sum += Mathf.Abs(record);
-            }
-            return Mathf.CeilToInt(sum / recordedMotorMovement.Length);
-        }
-
-        public void RecordEntry(int entry)
-        {
-            recordedMotorMovement[idx] = entry;
-            IncrementEntry();
-        }
-
-        private void IncrementEntry()
-        {
-            idx++;
-            if (idx > recordedMotorMovement.Length)
-                idx = 0;
-        }
-    }
-
-    //[RequireComponent(typeof(TachoMotorWithAbsolutePosition))]
     public class WaterMillMotorController : MonoBehaviour, IWaterMillMotorController
     {
         public bool IsInitialized { get; private set; } = false;
         public bool IsMoving { get; private set; } = false;
 
-
-        private MotorRecordings motorRecordings;
         private Action newTachoMotorInitialized;
         public void WaitForInitialize(Action tachoMotorInitializedEvent)
         {
             newTachoMotorInitialized = tachoMotorInitializedEvent;
         }
         
-        // private TachoMotorWithAbsolutePosition motor;
         private TachoMotor motor;
         public void OnMotorInitialized()
         {
             IsInitialized = true;
             _newTargetPosition = (t) => { };
-            motorRecordings = new MotorRecordings();
-            // motor = GetComponent<TachoMotorWithAbsolutePosition>();
             motor = GetComponent<TachoMotor>();
             motor.Drift();
             newTachoMotorInitialized.Invoke();
@@ -95,7 +60,7 @@ namespace Core.MotorTest.Scripts
         private void StartDefaultBehaviour()
         {
             if (!IsInitialized) return;
-            AssignContinousMotorState(true, 30);
+            AssignContinousMotorState(true);
         }
         
         private Action<IWheelChangeEventPayload> _newTargetPosition;
@@ -104,72 +69,65 @@ namespace Core.MotorTest.Scripts
             _newTargetPosition += wheelMotionChangedEvent;
         }
 
-        [SerializeField] private int lastPosition = 0;
-        public void OnMotorChangedPosition()
+        public void OnPositionChanged()
         {
-            var deltaPosition = motor.Position - lastPosition;
-            if (IsMoving)
-                WhenMotorRunningAndPositionChanged(deltaPosition);
-            else
-                WhenMotorStoppedAndPositionChanged(deltaPosition);
-            motorRecordings.RecordEntry(deltaPosition);
+            if(motor.Speed != 0)
+                _newTargetPosition.Invoke(new WheelChangeEventPayload(motor.Position, IsMoving));
+        }
+
+
+        public void Update()
+        {
+            if (!IsInitialized) return;
+            Debug.Log(motor.Speed);
+            
+            if (!MotorIsForciblyStopped() && IsMoving)
+            {
+                StopMotor();
+            }
+            // else if (IsMoving)
+            //     AssignContinousMovement();
+        }
+
+        public void OnSpeedChanged()
+        {
+            if(!IsMoving)
+            {
+                AssignContinousMovement();
+            }
+        }
+
+        private bool MotorIsForciblyStopped()
+        {
+            if (Mathf.Abs(motor.Speed) < 2f)
+                return false;
+            return true;
+        }
+
+        private void AssignContinousMovement()
+        {
+            AssignContinousMotorState(motor.Speed < 0);
+        }
+
+        private void StopMotor()
+        {
+            Debug.Log("Stopped");
+            motor.SetSpeed(0);
+            IsMoving = false;
+        }
+
+        private void AssignContinousMotorState(bool forwardDirection)
+        {
+            IsMoving = true;
+            SetSpeed(forwardDirection);
         }
         
-        private void WhenMotorRunningAndPositionChanged(int deltaPosition)
+        private void SetSpeed(bool forwardDirection)
         {
-            var isStopped = IsMotorForciblyStopped(deltaPosition);
-            AssignContinousMotorState(!isStopped, deltaPosition);
-        }
-        
-        private void WhenMotorStoppedAndPositionChanged(int deltaPosition)
-        {
-            var shouldMove = ShouldMotorRestart(deltaPosition);
-            AssignContinousMotorState(shouldMove, deltaPosition);
-        }
-
-        private void AssignContinousMotorState(bool shouldMove, int deltaPosition)
-        {
-            if (shouldMove)
-            {
-                Debug.Log("Started");
-                ContinueToPosition(deltaPosition <= 0);
-                IsMoving = true;
-            }
-            else
-            {
-                Debug.Log("Stopped");
-                lastPosition = 0;
-                motor.SetSpeed(0);
-                IsMoving = false;
-            }
-            _newTargetPosition.Invoke(new WheelChangeEventPayload(motor.Position, IsMoving));
-        }
-
-        private bool IsMotorForciblyStopped(int deltaPosition)
-        {
-            var absoluteDeltaPosition = Mathf.Abs(deltaPosition);
-            Debug.Log($"Absolute Delta: {absoluteDeltaPosition} : AverageMovement {motorRecordings.AverageMovement}");
-            if (motorRecordings.AverageMovement <  absoluteDeltaPosition)
-                return true;
-            return false;
-        }
-
-        private bool ShouldMotorRestart(int deltaPosition)
-        {
-            var absoluteDeltaPosition = Mathf.Abs(deltaPosition);
-            if (absoluteDeltaPosition > 0)
-                return true;
-            return false;
-        }
-
-        private void ContinueToPosition(bool forwardDirection)
-        {
-            lastPosition = motor.Position;
-            var delta = 25;
-            delta *= forwardDirection ? -1 : 1;
-            var nextPosition = motor.Position + delta;
-            //Debug.Log($"Going to position: {nextPosition}");
-            motor.GoToPosition(nextPosition, false, 12);
+            var speed = 12;
+            speed *= forwardDirection ? -1 : 1;
+            if(speed != motor.Speed)
+                motor.SetSpeed(speed);
         }
     }
 }

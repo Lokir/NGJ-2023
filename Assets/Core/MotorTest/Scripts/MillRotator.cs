@@ -30,7 +30,7 @@ namespace Core.MotorTest.Scripts
         private void Update()
         {
             if (!_isInitialized) return;
-            transform.rotation = Quaternion.Slerp(TargetRotation.rotation, this.transform.rotation, Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(TargetRotation.rotation, this.transform.rotation, 100*Time.deltaTime);
         }
     }
 }
