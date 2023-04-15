@@ -19,8 +19,17 @@ MonoBehaviour:
   showRotateGizmo: 1
   showNoConnectivityGizmo: 1
   importWidgetPathHistory:
-    keys: []
-    values: []
+    keys:
+    - widgetPathImportModel0
+    - widgetPathImportModel1
+    - widgetPathImportModel2
+    - widgetPathImportModel3
+    values:
+    - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Island
+      Adventure
+    - C:\Users\mikn\Desktop\Lego
+    - C:\Users\mikn\Desktop
+    - Packages/com.lego.modelimporter/Models
   partImporterLastCheckedVersion: 0
   hasShowedBrickToolsBefore: 1
   lastActiveSceneTool: LEGOModelImporter.SceneToolBrickBuilder
