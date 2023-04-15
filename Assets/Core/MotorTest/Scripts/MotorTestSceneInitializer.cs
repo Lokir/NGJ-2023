@@ -12,7 +12,7 @@ namespace Core.MotorTest.Scripts
         [SerializeField] private QuickTimeSpinWheelEvent spinWheelEvent;
         public void Awake()
         {
-            CompleteEvent = (i) => { };
+            CompleteEvent = QuickTimeEventCompleted;
             waterMillMotorController.WaitForInitialize(MotorInitialized);
             spinWheelEvent.Initialize(this);
         }
@@ -32,7 +32,7 @@ namespace Core.MotorTest.Scripts
 
         public ISpinWheelInDirectionController SpinWheelController => waterMillMotorController;
 
-        public SpinDirections DirectionsRequired => new SpinDirections(
+        public SpinDirections DirectionsRequired => new (
             new List<SpinDirectionData>()
             {
                 new SpinDirectionData(SpinDirection.Backward, 3), 

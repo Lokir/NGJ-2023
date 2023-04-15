@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core.Scripts;
 using Helpers;
+using LEGODeviceUnitySDK;
 using LEGOWirelessSDK;
 using UnityEngine;
 
@@ -78,34 +79,34 @@ namespace Core.MotorTest.Scripts
                 _newTargetPosition.Invoke(new WheelChangeEventPayload(motor.Position, IsMoving));
         }
 
-        private int lastSpeedInput = 0;
+        private SpinDirection currentSpinDirection;
         public void OnSpeedChanged()
         {
+            var direction = SpinDirection.None;
+            if (motor.Speed > 0) direction = SpinDirection.Backward;
+            else if (motor.Speed < 0) direction = SpinDirection.Forward;
+            
             if (!MotorIsForciblyStopped() && IsMoving)
             {
                 StopMotor();
             }
             else if(!IsMoving)
             {
-                AssignContinousMotorState(motor.Speed < 0);
+                AssignContinousMotorState(direction);
             }
-            else if (IsMoving && IsNotSameDirection(lastSpeedInput, motor.Speed))
+            else if (IsMoving && IsNotSameDirection(direction))
             {
-                var direction = SpinDirection.None;
-                if (motor.Speed < 0) direction = SpinDirection.Backward;
-                else if (motor.Speed > 0) direction = SpinDirection.Forward;
+                Debug.Log($"Changing Direction: {direction}");
+                currentSpinDirection = direction;
                 actionToSubscribe.Invoke(new SpinDirectionPayload(direction));
-                AssignContinousMotorState(motor.Speed < 0);
+                AssignContinousMotorState(currentSpinDirection);
             }
-            lastSpeedInput = motor.Speed;
         }
 
-        private bool IsNotSameDirection(int lastSpeed, int currentSpeed)
+        private bool IsNotSameDirection(SpinDirection newSpinDirection)
         {
-            if (lastSpeed > 0 && currentSpeed > 0) return false;
-            if (lastSpeed < 0 && currentSpeed < 0) return false;
+            if (currentSpinDirection == newSpinDirection) return false;
             return true;
-
         }
 
         private bool MotorIsForciblyStopped()
@@ -122,16 +123,17 @@ namespace Core.MotorTest.Scripts
             IsMoving = false;
         }
 
-        private void AssignContinousMotorState(bool forwardDirection)
+        private void AssignContinousMotorState(SpinDirection direction)
         {
             IsMoving = true;
-            SetSpeed(forwardDirection);
+            SetSpeed(direction);
         }
         
-        private void SetSpeed(bool forwardDirection)
+        private void SetSpeed(SpinDirection direction)
         {
             var speed = 12;
-            speed *= forwardDirection ? -1 : 1;
+            if (direction == SpinDirection.Backward)
+                speed *= -1;
             if (speed != motor.Speed)
             {
                 motor.SetSpeed(speed);
@@ -146,6 +148,11 @@ namespace Core.MotorTest.Scripts
         public void ClearSubscriptions()
         {
             this.actionToSubscribe = (t) => { };
+        }
+
+        public void StopSpinning()
+        {
+            StopMotor();
         }
     }
 }

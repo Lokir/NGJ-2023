@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
     "com.lego.creatures": "0.0.6-preview",
     "com.lego.minifig": "1.2.0",
     "com.lego.modelimporter": "0.10.1",

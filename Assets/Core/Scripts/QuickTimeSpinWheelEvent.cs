@@ -35,6 +35,7 @@ namespace Core.Scripts
     {
         void SubscribeToSpinDirectionEvent(Action<ISpinDirectionPayload> actionToSubscribe);
         void ClearSubscriptions();
+        void StopSpinning();
     }
 
     public interface IQuickTimeSpinWheelPayload : IQuickTimeEventPayload
@@ -57,7 +58,8 @@ namespace Core.Scripts
             DirectionsRequired = directionsRequired;
         }
 
-        List<SpinDirectionData> DirectionsRequired { get; }
+        public int Idx = 0;
+        public List<SpinDirectionData> DirectionsRequired { get; }
 
         public bool IsComplete()
         {
@@ -69,9 +71,11 @@ namespace Core.Scripts
             return false;
         }
 
-        public SpinDirectionData GetNextInLine()
+        public void MarkComplete(int idx)
         {
-            return DirectionsRequired.First(x => x.Completed == false);
+            var point = DirectionsRequired[idx];
+            point.Completed = true;
+            Idx++;
         }
     }
     public class SpinDirectionData
@@ -108,7 +112,8 @@ namespace Core.Scripts
 
         public override void PlayEvent()
         {
-            DisplayNextSpin(dependencies.DirectionsRequired.GetNextInLine());
+            var idx = dependencies.DirectionsRequired.Idx;
+            DisplayNextSpin(dependencies.DirectionsRequired.DirectionsRequired[idx]);
         }
 
         public override void StopEvent()
@@ -118,22 +123,28 @@ namespace Core.Scripts
 
         private void DisplayNextSpin(SpinDirectionData directionData)
         {
+            dependencies.SpinWheelController.StopSpinning();
             Debug.Log($"Spin direction: {directionData.TargetDirection}");
         }
 
         private void WheelSpun(ISpinDirectionPayload spinDirectionPayload)
         {
-            var directionData = dependencies.DirectionsRequired.GetNextInLine();
-            if(directionData.TargetDirection == spinDirectionPayload.Direction || directionData.TargetDirection == SpinDirection.Either)
-                directionData.Completed = true;
-            if (dependencies.DirectionsRequired.IsComplete())
+            var idx = dependencies.DirectionsRequired.Idx;
+            var directionData = dependencies.DirectionsRequired.DirectionsRequired[idx];
+            if (directionData.TargetDirection == spinDirectionPayload.Direction ||
+                directionData.TargetDirection == SpinDirection.Either)
             {
-                CompleteEvent(true);
-            }
-            else
-            {
-                directionData = dependencies.DirectionsRequired.GetNextInLine();
-                DisplayNextSpin(directionData);
+                dependencies.DirectionsRequired.MarkComplete(idx);
+                if (dependencies.DirectionsRequired.IsComplete())
+                {
+                    CompleteEvent(true);
+                }
+                else
+                {
+                    idx = dependencies.DirectionsRequired.Idx;
+                    directionData = dependencies.DirectionsRequired.DirectionsRequired[idx];
+                    DisplayNextSpin(directionData);
+                }
             }
         }
 
