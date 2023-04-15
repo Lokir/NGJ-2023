@@ -26,15 +26,15 @@ MonoBehaviour:
     - widgetPathImportModel3
     - widgetPathImportModel4
     values:
-    - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Danger
-      Zone
-    - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Knights
-      Kingdom
-    - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Environment
     - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Island
       Adventure
-    - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Happy
-      Halloween
+    - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Brick
+      Collections
+    - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Characters
+    - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Knights
+      Kingdom
+    - C:\Users\mikn\Desktop\Unity\VersionControlled\NGJ\NGJ-2023\LEGO Models\Danger
+      Zone
   partImporterLastCheckedVersion: 0
   hasShowedBrickToolsBefore: 1
   lastActiveSceneTool: LEGOModelImporter.SceneToolBrickBuilder
