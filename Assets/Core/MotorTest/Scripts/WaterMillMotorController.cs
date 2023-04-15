@@ -40,17 +40,19 @@ namespace Core.MotorTest.Scripts
         public bool IsInitialized { get; private set; } = false;
         public bool IsMoving { get; private set; } = false;
 
+        private ITimer stopRandomInputTimer;
         private Action newTachoMotorInitialized;
         public void WaitForInitialize(Action tachoMotorInitializedEvent)
         {
             newTachoMotorInitialized = tachoMotorInitializedEvent;
         }
-        
+
         private TachoMotor motor;
         public void OnMotorInitialized()
         {
             IsInitialized = true;
             _newTargetPosition = (t) => { };
+            stopRandomInputTimer = gameObject.AddComponent<TimerFixedUpdateLoop>();
             motor = GetComponent<TachoMotor>();
             motor.Drift();
             newTachoMotorInitialized.Invoke();
@@ -75,44 +77,39 @@ namespace Core.MotorTest.Scripts
                 _newTargetPosition.Invoke(new WheelChangeEventPayload(motor.Position, IsMoving));
         }
 
+        [SerializeField] private int speed;
 
         public void Update()
         {
             if (!IsInitialized) return;
-            Debug.Log(motor.Speed);
-            
-            if (!MotorIsForciblyStopped() && IsMoving)
-            {
-                StopMotor();
-            }
-            // else if (IsMoving)
-            //     AssignContinousMovement();
+            speed = motor.Speed;
         }
 
         public void OnSpeedChanged()
         {
-            if(!IsMoving)
+            if (!MotorIsForciblyStopped() && IsMoving)
             {
-                AssignContinousMovement();
+                StopMotor();
+            }
+            else if(!IsMoving)
+            {
+                if(Mathf.Abs(motor.Speed) > 3f)
+                    AssignContinousMotorState(motor.Speed < 0);
             }
         }
 
         private bool MotorIsForciblyStopped()
         {
-            if (Mathf.Abs(motor.Speed) < 2f)
+            if (Mathf.Abs(motor.Speed) < 3f)
                 return false;
             return true;
         }
-
-        private void AssignContinousMovement()
-        {
-            AssignContinousMotorState(motor.Speed < 0);
-        }
-
+        
         private void StopMotor()
         {
             Debug.Log("Stopped");
             motor.SetSpeed(0);
+            //motor.SetPower(0);
             IsMoving = false;
         }
 
@@ -126,8 +123,11 @@ namespace Core.MotorTest.Scripts
         {
             var speed = 12;
             speed *= forwardDirection ? -1 : 1;
-            if(speed != motor.Speed)
+            if (speed != motor.Speed)
+            {
+                Debug.Log($"Setting speed! {speed}");
                 motor.SetSpeed(speed);
+            }
         }
     }
 }
