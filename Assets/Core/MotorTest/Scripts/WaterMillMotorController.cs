@@ -58,7 +58,6 @@ namespace Core.MotorTest.Scripts
             motor = GetComponent<TachoMotor>();
             motor.Drift();
             tachoMotorInitialized.Invoke();
-            StartDefaultBehaviour();
         }
         
         private void StartDefaultBehaviour()
@@ -153,6 +152,13 @@ namespace Core.MotorTest.Scripts
         public void StopSpinning()
         {
             StopMotor();
+        }
+
+        public void SpinInDirection(SpinDirection direction)
+        {
+            currentSpinDirection = direction;
+            AssignContinousMotorState(direction);
+            Debug.Log("Spin In Direction");
         }
     }
 }
