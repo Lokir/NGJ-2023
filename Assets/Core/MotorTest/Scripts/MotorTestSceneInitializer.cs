@@ -1,15 +1,16 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.MotorTest.Scripts
 {
     public class MotorTestSceneInitializer : MonoBehaviour, IMillRotatorDependencies
     {
         [SerializeField] private MillRotator millRotator;
-        [SerializeField] private TachoMotorController tachoMotorController;
+        [FormerlySerializedAs("tachoMotorController")] [SerializeField] private WaterMillMotorController waterMillMotorController;
 
         public void Awake()
         {
-            tachoMotorController.WaitForInitialize(MotorInitialized);
+            waterMillMotorController.WaitForInitialize(MotorInitialized);
         }
 
         private void MotorInitialized()
@@ -17,6 +18,6 @@ namespace Core.MotorTest.Scripts
             millRotator.Initialize(this);
         }
 
-        public IVirtualMill Mill => tachoMotorController;
+        public IVirtualMill Mill => waterMillMotorController;
     }
 }
