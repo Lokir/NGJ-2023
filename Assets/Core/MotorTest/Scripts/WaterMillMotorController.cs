@@ -40,7 +40,6 @@ namespace Core.MotorTest.Scripts
         public bool IsInitialized { get; private set; } = false;
         public bool IsMoving { get; private set; } = false;
 
-        private ITimer stopRandomInputTimer;
         private Action newTachoMotorInitialized;
         public void WaitForInitialize(Action tachoMotorInitializedEvent)
         {
@@ -52,7 +51,6 @@ namespace Core.MotorTest.Scripts
         {
             IsInitialized = true;
             _newTargetPosition = (t) => { };
-            stopRandomInputTimer = gameObject.AddComponent<TimerFixedUpdateLoop>();
             motor = GetComponent<TachoMotor>();
             motor.Drift();
             newTachoMotorInitialized.Invoke();
@@ -77,14 +75,7 @@ namespace Core.MotorTest.Scripts
                 _newTargetPosition.Invoke(new WheelChangeEventPayload(motor.Position, IsMoving));
         }
 
-        [SerializeField] private int speed;
-
-        public void Update()
-        {
-            if (!IsInitialized) return;
-            speed = motor.Speed;
-        }
-
+        private int lastSpeedInput = 0;
         public void OnSpeedChanged()
         {
             if (!MotorIsForciblyStopped() && IsMoving)
@@ -93,9 +84,21 @@ namespace Core.MotorTest.Scripts
             }
             else if(!IsMoving)
             {
-                if(Mathf.Abs(motor.Speed) > 3f)
-                    AssignContinousMotorState(motor.Speed < 0);
+                AssignContinousMotorState(motor.Speed < 0);
             }
+            else if (IsMoving && IsNotSameDirection(lastSpeedInput, motor.Speed))
+            {
+                AssignContinousMotorState(motor.Speed < 0);
+            }
+            lastSpeedInput = motor.Speed;
+        }
+
+        private bool IsNotSameDirection(int lastSpeed, int currentSpeed)
+        {
+            if (lastSpeed > 0 && currentSpeed > 0) return false;
+            if (lastSpeed < 0 && currentSpeed < 0) return false;
+            return true;
+
         }
 
         private bool MotorIsForciblyStopped()
@@ -109,7 +112,7 @@ namespace Core.MotorTest.Scripts
         {
             Debug.Log("Stopped");
             motor.SetSpeed(0);
-            //motor.SetPower(0);
+            motor.SetPower(0);
             IsMoving = false;
         }
 
