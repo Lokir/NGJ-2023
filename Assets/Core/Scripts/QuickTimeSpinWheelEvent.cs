@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Core.Scripts
@@ -36,6 +34,7 @@ namespace Core.Scripts
         void SubscribeToSpinDirectionEvent(Action<ISpinDirectionPayload> actionToSubscribe);
         void ClearSubscriptions();
         void StopSpinning();
+        void SpinInDirection(SpinDirection direction);
     }
 
     public interface IQuickTimeSpinWheelPayload : IQuickTimeEventPayload
@@ -58,7 +57,6 @@ namespace Core.Scripts
             DirectionsRequired = directionsRequired;
         }
 
-        public int Idx = 0;
         public List<SpinDirectionData> DirectionsRequired { get; }
 
         public bool IsComplete()
@@ -68,14 +66,13 @@ namespace Core.Scripts
                 if (!directionData.Completed)
                     return false;
             }
-            return false;
+            return true;
         }
 
         public void MarkComplete(int idx)
         {
             var point = DirectionsRequired[idx];
             point.Completed = true;
-            Idx++;
         }
     }
     public class SpinDirectionData
@@ -110,9 +107,9 @@ namespace Core.Scripts
             else throw new ArgumentException("Wrong dependency type given.");
         }
 
+        private int idx = 0;
         public override void PlayEvent()
         {
-            var idx = dependencies.DirectionsRequired.Idx;
             DisplayNextSpin(dependencies.DirectionsRequired.DirectionsRequired[idx]);
         }
 
@@ -123,25 +120,24 @@ namespace Core.Scripts
 
         private void DisplayNextSpin(SpinDirectionData directionData)
         {
-            dependencies.SpinWheelController.StopSpinning();
+            dependencies.SpinWheelController.SpinInDirection(directionData.TargetDirection == SpinDirection.Backward ? SpinDirection.Forward : SpinDirection.Backward);
             Debug.Log($"Spin direction: {directionData.TargetDirection}");
         }
 
         private void WheelSpun(ISpinDirectionPayload spinDirectionPayload)
         {
-            var idx = dependencies.DirectionsRequired.Idx;
             var directionData = dependencies.DirectionsRequired.DirectionsRequired[idx];
             if (directionData.TargetDirection == spinDirectionPayload.Direction ||
                 directionData.TargetDirection == SpinDirection.Either)
             {
                 dependencies.DirectionsRequired.MarkComplete(idx);
+                idx++;
                 if (dependencies.DirectionsRequired.IsComplete())
                 {
                     CompleteEvent(true);
                 }
                 else
                 {
-                    idx = dependencies.DirectionsRequired.Idx;
                     directionData = dependencies.DirectionsRequired.DirectionsRequired[idx];
                     DisplayNextSpin(directionData);
                 }
@@ -152,6 +148,7 @@ namespace Core.Scripts
         {
             dependencies.CompleteEvent(new QuickTimeSpinWheelPayload(success));
             dependencies.SpinWheelController.ClearSubscriptions();
+            dependencies.SpinWheelController.StopSpinning();
         }
     }
 }
