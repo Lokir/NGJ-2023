@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core.Scripts;
 using Helpers;
 using LEGOWirelessSDK;
 using UnityEngine;
@@ -30,7 +31,7 @@ namespace Core.MotorTest.Scripts
         void SubscribeToOnWheelChanged(Action<IWheelChangeEventPayload> wheelMotionChangedEvent);
     }
 
-    public interface IWaterMillMotorController : IVirtualMill
+    public interface IWaterMillMotorController : IVirtualMill, ISpinWheelInDirectionController
     {
         void WaitForInitialize(Action tachoMotorInitializedEvent);
     }
@@ -40,10 +41,12 @@ namespace Core.MotorTest.Scripts
         public bool IsInitialized { get; private set; } = false;
         public bool IsMoving { get; private set; } = false;
 
-        private Action newTachoMotorInitialized;
+        private Action<ISpinDirectionPayload> actionToSubscribe;
+        private Action tachoMotorInitialized;
         public void WaitForInitialize(Action tachoMotorInitializedEvent)
         {
-            newTachoMotorInitialized = tachoMotorInitializedEvent;
+            tachoMotorInitialized = tachoMotorInitializedEvent;
+            actionToSubscribe = (t) => { };
         }
 
         private TachoMotor motor;
@@ -53,14 +56,14 @@ namespace Core.MotorTest.Scripts
             _newTargetPosition = (t) => { };
             motor = GetComponent<TachoMotor>();
             motor.Drift();
-            newTachoMotorInitialized.Invoke();
+            tachoMotorInitialized.Invoke();
             StartDefaultBehaviour();
         }
         
         private void StartDefaultBehaviour()
         {
-            if (!IsInitialized) return;
-            AssignContinousMotorState(true);
+            // if (!IsInitialized) return;
+            // AssignContinousMotorState(true);
         }
         
         private Action<IWheelChangeEventPayload> _newTargetPosition;
@@ -88,6 +91,10 @@ namespace Core.MotorTest.Scripts
             }
             else if (IsMoving && IsNotSameDirection(lastSpeedInput, motor.Speed))
             {
+                var direction = SpinDirection.None;
+                if (motor.Speed < 0) direction = SpinDirection.Backward;
+                else if (motor.Speed > 0) direction = SpinDirection.Forward;
+                actionToSubscribe.Invoke(new SpinDirectionPayload(direction));
                 AssignContinousMotorState(motor.Speed < 0);
             }
             lastSpeedInput = motor.Speed;
@@ -110,7 +117,6 @@ namespace Core.MotorTest.Scripts
         
         private void StopMotor()
         {
-            Debug.Log("Stopped");
             motor.SetSpeed(0);
             motor.SetPower(0);
             IsMoving = false;
@@ -128,9 +134,18 @@ namespace Core.MotorTest.Scripts
             speed *= forwardDirection ? -1 : 1;
             if (speed != motor.Speed)
             {
-                Debug.Log($"Setting speed! {speed}");
                 motor.SetSpeed(speed);
             }
+        }
+        
+        public void SubscribeToSpinDirectionEvent(Action<ISpinDirectionPayload> actionToSubscribe)
+        {
+            this.actionToSubscribe += actionToSubscribe;
+        }
+
+        public void ClearSubscriptions()
+        {
+            this.actionToSubscribe = (t) => { };
         }
     }
 }
