@@ -77,7 +77,7 @@ namespace Core.MotorTest.Scripts
 
         private void ContinueToPosition()
         {
-            motor.GoToPosition(motor.Position+100, false, 200);
+            motor.GoToPosition(motor.Position+100, false, 100);
         }
     }
 }
