@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core.Scripts;
 using Helpers;
 using UnityEngine;
@@ -205,7 +206,9 @@ namespace Core.MotorTest.Scripts
 
         private void StartGame()
         {
-           timer.StartTimer(0.2f, null, ProgressEventCycle);
+            idx = 0;
+            eventsToGoThrough = eventsToGoThrough.OrderBy(a => Guid.NewGuid()).ToList();
+            timer.StartTimer(0.2f, null, ProgressEventCycle);
         }
 
         public IVirtualMill Mill => waterMillMotorController;
@@ -220,6 +223,12 @@ namespace Core.MotorTest.Scripts
                 ProgressEventCycle();
             else 
                 Debug.Log("Game completed");
+        }
+
+        public void ResetEventList()
+        {
+            eventsToGoThrough = eventsToGoThrough.OrderBy(a => Guid.NewGuid()).ToList();
+            idx = 0;
         }
     }
 }
