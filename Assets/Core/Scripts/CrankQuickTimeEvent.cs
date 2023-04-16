@@ -32,6 +32,9 @@ namespace Core.Scripts
     }
     public class CrankQuickTimeEvent : QuickTimeEvent, ICrankQuickTimeEvent
     {
+        [SerializeField] private Sprite rotateForwards;
+        [SerializeField] private Sprite rotateBackwards;
+
         private ITimer crankTimer;
         private ICrankQuickTimeEventDependencies dependencies;
         private int motorStartPosition;
@@ -52,7 +55,7 @@ namespace Core.Scripts
         {
             motorStartPosition = dependencies.CrankController.MotorPosition;
             motorRequiredPosition = motorStartPosition + dependencies.RequiredPosition;
-            Debug.Log($"Crank it! {dependencies.RequiredPosition}");
+            dependencies.Shower.Show(dependencies.RequiredPosition < 0 ? rotateBackwards : rotateForwards);
             cummulativeTargetPosition = 0;
             crankTimer.StartTimer(dependencies.TimeAllowed, CrankTick, EventComplete);
         }
@@ -82,11 +85,23 @@ namespace Core.Scripts
         {
             CompleteEvent(motorRequiredPosition < cummulativeTargetPosition);
         }
-        
+        private bool _success = false;
         private void CompleteEvent(bool success)
         {
-            dependencies.CompleteEvent(new QuickTimeTapButtonEventPayload(success));
+            
+            _success = success;
+            if(success)
+                dependencies.WinSoundEmitter.Play();
+            else 
+                dependencies.LossSoundEmitter.Play();
             dependencies.CrankController.ClearSubscriptions();
+            Invoke("DelayedCompleteEvent", 2f);
+
+        }
+        private void DelayedCompleteEvent()
+        {
+            dependencies.Shower.Hide();
+            dependencies.CompleteEvent(new QuickTimeTapButtonEventPayload(_success));
         }
     }
 }

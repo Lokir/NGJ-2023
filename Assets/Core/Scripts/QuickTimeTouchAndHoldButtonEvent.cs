@@ -29,6 +29,8 @@ namespace Core.Scripts
     }
     public class QuickTimeTouchAndHoldButtonEvent : QuickTimeEvent, IQuickTimeTouchAndHoldButtonEvent
     {
+        [SerializeField] private Sprite tapAndHoldImage;
+
         private IQuickTimeTouchAndHoldButtonEventDependencies dependencies;
         public override void Initialize(IQuickTimeEventDependencies quicktimeDependencies)
         {
@@ -45,7 +47,7 @@ namespace Core.Scripts
 
         public override void PlayEvent()
         {
-            Debug.Log("Hold the button!");
+            dependencies.Shower.Show(tapAndHoldImage);
         }
 
         public override void StopEvent()
@@ -57,12 +59,24 @@ namespace Core.Scripts
         {
             CompleteEvent(payload.Success);
         }
-        
+        private bool _success = false;
+
         private void CompleteEvent(bool success)
         {
-            dependencies.CompleteEvent(new QuickTimeTapButtonEventPayload(success));
+            _success = success;
+            if(success)
+                dependencies.WinSoundEmitter.Play();
+            else 
+                dependencies.LossSoundEmitter.Play();
             dependencies.TouchAndHoldController.ClearSubscriptions();
             dependencies.TouchAndHoldController.Reset();
+            Invoke("DelayedCompleteEvent", 2f);
+
+        }
+        private void DelayedCompleteEvent()
+        {
+            dependencies.CompleteEvent(new QuickTimeTapButtonEventPayload(_success));
+
         }
     }
 }

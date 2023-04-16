@@ -27,21 +27,12 @@ public class EndScoreManager : MonoBehaviour
 
     public void UpdateScore(int value) {
         score += value;
-        
-        /*
-        gameNumber++;
-        if (gameNumber == numberOfGames) {
-            GameOver(score / 2);
-        }
-        */
     }
+    
 
-    public int GetScore() {
-        return score;
-    }
-
-    public void GameOver(int score) {
-
+    public void GameOver()
+    {
+        score /= 2;
         if (score >= scoreImages.Length) {
             score = scoreImages.Length - 1;
         }

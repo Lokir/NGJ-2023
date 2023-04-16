@@ -103,6 +103,8 @@ namespace Core.MotorTest.Scripts
         IMillRotatorDependencies
     {
 
+        [SerializeField] private EndScoreManager endScoreManager;
+        
         [SerializeField] private QuicktimeShower shower;
         [SerializeField] private StudioEventEmitter lossSoundEmitter;
         [SerializeField] private StudioEventEmitter winSoundEmitter;
@@ -249,13 +251,12 @@ namespace Core.MotorTest.Scripts
 
         private void QuickTimeEventCompleted(IQuickTimeEventPayload payload)
         {
-            Debug.Log($"Completed Event: {payload.Success}");
-            Debug.Log($"Added point value {(payload.Success ? 1: 0)}");
+            endScoreManager.UpdateScore((payload.Success ? 1 : 0));
             idx++;
             if(idx < eventsToGoThrough.Count)
                 ProgressEventCycle();
             else 
-                Debug.Log("Game completed");
+                endScoreManager.GameOver();
         }
     }
 }

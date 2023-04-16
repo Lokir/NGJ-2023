@@ -1,7 +1,6 @@
 using System;
 using Core.MotorTest.Scripts;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -20,8 +19,9 @@ public class MenuController : MonoBehaviour
         gameObject.SetActive(!paused);
     }
 
-    public static void LoadLevel(int levelBuildIncex) {
-        SceneManager.LoadScene(levelBuildIncex);
+    public void LoadLevel(int levelBuildIncex)
+    {
+        StartLevel();
     }  
 
     public void StartLevel() {

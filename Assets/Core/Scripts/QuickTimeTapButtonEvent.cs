@@ -29,6 +29,8 @@ namespace Core.Scripts
     }
     public class QuickTimeTapButtonEvent : QuickTimeEvent, IQuickTimeTapButtonEvent
     {
+        [SerializeField] private Sprite tapImage;
+
         private IQuickTimeTapButtonEventDependencies dependencies;
         public override void Initialize(IQuickTimeEventDependencies quicktimeDependencies)
         {
@@ -45,7 +47,7 @@ namespace Core.Scripts
 
         public override void PlayEvent()
         {
-            Debug.Log("Push the button!");
+            dependencies.Shower.Show(tapImage);
         }
 
         public override void StopEvent()
@@ -58,10 +60,23 @@ namespace Core.Scripts
             CompleteEvent(payload.Success);
         }
         
+        private bool _success = false;
         private void CompleteEvent(bool success)
         {
-            dependencies.CompleteEvent(new QuickTimeTapButtonEventPayload(success));
+            _success = success;
+            if(success)
+                dependencies.WinSoundEmitter.Play();
+            else 
+                dependencies.LossSoundEmitter.Play();
             dependencies.TapController.ClearSubscriptions();
+            Invoke("DelayedCompleteEvent", 2f);
+        }
+        
+        private void DelayedCompleteEvent()
+        {
+            dependencies.CompleteEvent(new QuickTimeSpinWheelPayload(_success));
+            dependencies.Shower.Hide();
+
         }
     }
 }
