@@ -7,6 +7,7 @@ namespace Core.Scripts
 {
     public interface ICrankController
     {
+        int MotorPosition { get; }
         void SubscribeToSpinDirectionEvent(Action<ICrankDirectionPayload> actionToSubscribe);
         void ClearSubscriptions();
         void Reset();
@@ -44,6 +45,8 @@ namespace Core.Scripts
             return SpinDirection.None;
         }
 
+        public int MotorPosition => motor.Position;
+
         public void SubscribeToSpinDirectionEvent(Action<ICrankDirectionPayload> actionToSubscribe)
         {
             this.actionToSubscribe = actionToSubscribe;
@@ -56,6 +59,7 @@ namespace Core.Scripts
 
         public void Reset()
         {
+            motor.ResetPosition();
         }
     }
 }

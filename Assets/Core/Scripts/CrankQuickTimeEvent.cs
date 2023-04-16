@@ -34,7 +34,8 @@ namespace Core.Scripts
     {
         private ITimer crankTimer;
         private ICrankQuickTimeEventDependencies dependencies;
-
+        private int motorStartPosition;
+        private int motorRequiredPosition;
         public override void Initialize(IQuickTimeEventDependencies quicktimeDependencies)
         {
             if (quicktimeDependencies is ICrankQuickTimeEventDependencies newDependencies)
@@ -49,6 +50,8 @@ namespace Core.Scripts
 
         public override void PlayEvent()
         {
+            motorStartPosition = dependencies.CrankController.MotorPosition;
+            motorRequiredPosition = motorStartPosition + dependencies.RequiredPosition;
             Debug.Log($"Crank it! {dependencies.RequiredPosition}");
             cummulativeTargetPosition = 0;
             crankTimer.StartTimer(dependencies.TimeAllowed, CrankTick, EventComplete);
@@ -68,7 +71,7 @@ namespace Core.Scripts
 
         private void CrankTick(float t)
         {
-            if (cummulativeTargetPosition > dependencies.RequiredPosition)
+            if (cummulativeTargetPosition > motorRequiredPosition)
             {
                 crankTimer.StopTimer();
                 EventComplete();
@@ -77,8 +80,7 @@ namespace Core.Scripts
         
         private void EventComplete()
         {
-            dependencies.CrankController.Reset();
-            CompleteEvent(dependencies.RequiredPosition < cummulativeTargetPosition);
+            CompleteEvent(motorRequiredPosition < cummulativeTargetPosition);
         }
         
         private void CompleteEvent(bool success)
