@@ -73,7 +73,7 @@ namespace Core.MotorTest.Scripts
         public int RequiredPosition { get; }
         public ICrankController CrankController { get; }
     }
-    public class MotorTestSceneInitializer : 
+    public class BreadItGameController : 
         MonoBehaviour, 
         IMillRotatorDependencies
     {
@@ -86,6 +86,8 @@ namespace Core.MotorTest.Scripts
         [SerializeField] private QuickTimeTouchAndHoldButtonEvent touchAndHoldButtonEvent;
         [SerializeField] private CrankQuickTimeEvent crankQuickTimeEvent;
 
+        public bool IsReady { get; private set; } = false;
+        
         private int idx = 0;
         [SerializeField] private List<QuickTimeEvent> eventsToGoThrough;
         public IButtonTapController TouchAndHoldController { get; private set; }
@@ -200,15 +202,16 @@ namespace Core.MotorTest.Scripts
 
             if (buttonInitialized && wheelMotorInitialized && touchAndHoldInitialized && crankInitialized)
             {
-                StartGame();
+                IsReady = true;
             }
         }
 
-        private void StartGame()
+        public void StartGame()
         {
+            if (!IsReady) return;
             idx = 0;
             eventsToGoThrough = eventsToGoThrough.OrderBy(a => Guid.NewGuid()).ToList();
-            timer.StartTimer(0.2f, null, ProgressEventCycle);
+            ProgressEventCycle();
         }
 
         public IVirtualMill Mill => waterMillMotorController;
@@ -223,12 +226,6 @@ namespace Core.MotorTest.Scripts
                 ProgressEventCycle();
             else 
                 Debug.Log("Game completed");
-        }
-
-        public void ResetEventList()
-        {
-            eventsToGoThrough = eventsToGoThrough.OrderBy(a => Guid.NewGuid()).ToList();
-            idx = 0;
         }
     }
 }
