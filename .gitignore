@@ -48,3 +48,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 .DS_Store
+fmod_editor.log
