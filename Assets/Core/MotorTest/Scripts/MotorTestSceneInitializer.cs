@@ -7,10 +7,16 @@ using UnityEngine.Serialization;
 
 namespace Core.MotorTest.Scripts
 {
-    public class MotorTestSceneInitializer : MonoBehaviour, IMillRotatorDependencies, IQuickTimeSpinWheelDependencies
+    public class MotorTestSceneInitializer : 
+        MonoBehaviour, 
+        IMillRotatorDependencies, 
+        IQuickTimeSpinWheelDependencies,
+        IQuickTimeTapButtonEventDependencies
     {
         [FormerlySerializedAs("tachoMotorController")] [SerializeField] private WaterMillMotorController waterMillMotorController;
         [SerializeField] private QuickTimeSpinWheelEvent spinWheelEvent;
+        [SerializeField] private QuickTimeTapButtonEvent quickTimeTapButtonEvent;
+        public IButtonTapController TapController { get; private set; }
         private ITimer timer;
         public void Awake()
         {
@@ -21,14 +27,16 @@ namespace Core.MotorTest.Scripts
                     new SpinDirectionData(SpinDirection.Forward, 3), 
                 });
             timer = gameObject.AddComponent<TimerFixedUpdateLoop>();
+            TapController = gameObject.AddComponent<DummyButtonTapController>();
             CompleteEvent = QuickTimeEventCompleted;
             waterMillMotorController.WaitForInitialize(MotorInitialized);
             spinWheelEvent.Initialize(this);
+            quickTimeTapButtonEvent.Initialize(this);
         }
 
         private void StartEventCycle()
         {
-            spinWheelEvent.PlayEvent();
+            quickTimeTapButtonEvent.PlayEvent();
         }
         
         private void MotorInitialized()

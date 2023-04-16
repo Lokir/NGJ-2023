@@ -10,7 +10,7 @@ namespace Core.Scripts
 
     public interface IQuickTimeTapButtonEventDependencies : IQuickTimeEventDependencies
     {
-
+        IButtonTapController TapController { get; }
     }
 
     public interface IQuickTimeTapButtonEventPayload : IQuickTimeEventPayload
@@ -35,6 +35,8 @@ namespace Core.Scripts
             if (quicktimeDependencies is IQuickTimeTapButtonEventDependencies newDependencies)
             {
                 dependencies = newDependencies;
+                dependencies.TapController.SubscribeToSpinDirectionEvent(ButtonTapped);
+
             }
             else throw new ArgumentException("Wrong dependency type given.");
         }
@@ -49,10 +51,16 @@ namespace Core.Scripts
         {
             CompleteEvent(false);
         }
+
+        private void ButtonTapped(IQuickTimeTapButtonEventPayload payload)
+        {
+            CompleteEvent(payload.Success);
+        }
         
         private void CompleteEvent(bool success)
         {
             dependencies.CompleteEvent(new QuickTimeTapButtonEventPayload(success));
+            dependencies.TapController.ClearSubscriptions();
         }
     }
 }

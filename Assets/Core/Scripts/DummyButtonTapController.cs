@@ -5,9 +5,24 @@ namespace Core.Scripts
 {
     public class DummyButtonTapController : MonoBehaviour, IButtonTapController
     {
-        public void SubscribeToSpinDirectionEvent(Action<IQuickTimeTapButtonEventPayload> actionToSubscribe)
+        private Action<IQuickTimeTapButtonEventPayload> actionToSubscribe;
+        public void SubscribeToSpinDirectionEvent(
+            Action<IQuickTimeTapButtonEventPayload> actionToSubscribe)
         {
-            throw new NotImplementedException();
+            this.actionToSubscribe = actionToSubscribe;
+        }
+
+        public void ClearSubscriptions()
+        {
+            this.actionToSubscribe = null;
+        }
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                actionToSubscribe?.Invoke(new QuickTimeTapButtonEventPayload(true));
+            }
         }
     }
 }

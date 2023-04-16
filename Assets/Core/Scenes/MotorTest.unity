@@ -508,6 +508,7 @@ GameObject:
   - component: {fileID: 1791777567}
   - component: {fileID: 1791777566}
   - component: {fileID: 1791777568}
+  - component: {fileID: 1791777569}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -529,6 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterMillMotorController: {fileID: 1585985375}
   spinWheelEvent: {fileID: 1791777568}
+  quickTimeTapButtonEvent: {fileID: 1791777569}
 --- !u!4 &1791777567
 Transform:
   m_ObjectHideFlags: 0
@@ -554,6 +556,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e653c37937d621144858ce5b8474f98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1791777569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791777565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea888848403647740869da3af6112a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1963194280
