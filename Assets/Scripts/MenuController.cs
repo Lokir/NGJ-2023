@@ -5,7 +5,7 @@ using UnityEngine;
 public class MenuController : MonoBehaviour
 {
     [SerializeField] private BreadItGameController gameController;
-    public GameObject menuPanel, gameScreen;
+    public GameObject menuPanel, gameScreen, scoreScreen;
     bool paused;
 
     private void Update() {
@@ -22,12 +22,13 @@ public class MenuController : MonoBehaviour
     public void LoadLevel(int levelBuildIncex)
     {
         StartLevel();
-    }  
-
+    }
+    
     public void StartLevel() {
         if (gameController.StartGame())
         {
             menuPanel.SetActive(false);
+            scoreScreen.SetActive(false);
             gameScreen.SetActive(true);
         }
     }

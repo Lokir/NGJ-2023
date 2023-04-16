@@ -172,7 +172,7 @@ namespace Core.MotorTest.Scripts
         private int ProvideCrankRange()
         {
             var rand = Random.Range(720, 2000);
-            if (rand % 2 == 0) rand *= -1;
+            // if (rand % 2 == 0) rand *= -1;
             return rand;
         }
 
@@ -260,8 +260,11 @@ namespace Core.MotorTest.Scripts
             idx++;
             if(idx < eventsToGoThrough.Count)
                 ProgressEventCycle();
-            else 
+            else
+            {
+                endScoreManager.gameObject.SetActive(true);
                 endScoreManager.GameOver();
+            }
         }
     }
 }
