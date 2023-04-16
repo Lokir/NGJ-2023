@@ -84,7 +84,6 @@ namespace LEGOWirelessSDK
                 Speed = speed
             };
             tachoMotor.SendCommand(cmd);
-            motor.SendCommand(motor.SetPowerCommand(power));
         }
 
         public void SpinForTime(int time, int speed = 100, bool brake = false)

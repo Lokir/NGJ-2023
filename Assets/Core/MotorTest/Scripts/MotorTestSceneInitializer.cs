@@ -90,7 +90,8 @@ namespace Core.MotorTest.Scripts
 
         private void StartGame()
         {
-            timer.StartTimer(0.2f, null, StartEventCycle);
+           // timer.StartTimer(0.2f, null, StartEventCycle);
+            waterMillMotorController.SpinInDirection(SpinDirection.Backward);
         }
 
         public IVirtualMill Mill => waterMillMotorController;

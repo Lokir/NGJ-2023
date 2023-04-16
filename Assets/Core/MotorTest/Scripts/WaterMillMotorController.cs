@@ -160,5 +160,19 @@ namespace Core.MotorTest.Scripts
             AssignContinousMotorState(direction);
             Debug.Log("Spin In Direction");
         }
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Debug.Log("Backwards!");
+                SpinInDirection(SpinDirection.Backward);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Debug.Log("Forwards!");
+                SpinInDirection(SpinDirection.Forward);
+            }
+        }
     }
 }
