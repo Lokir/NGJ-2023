@@ -51,6 +51,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-5813410223467750872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GameOver/Perfect
+  m_EditorClassIdentifier: 
+  Path: event:/GameOver/Perfect
+  Guid:
+    Data1: 47763897
+    Data2: 1238867837
+    Data3: -735476053
+    Data4: -1395817629
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6000
 --- !u!114 &-4905828145612743050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,15 +203,21 @@ MonoBehaviour:
   - {fileID: 4430213422828189449}
   - {fileID: 9052018696531716277}
   - {fileID: 467490723457131810}
+  - {fileID: 1503697538378336068}
+  - {fileID: 9117044234464286176}
+  - {fileID: 8956851170159943794}
+  - {fileID: -5813410223467750872}
+  - {fileID: 3337717983831356253}
   EditorParameters:
   - {fileID: -4446925032718163837}
   - {fileID: 5076334018107785834}
   - {fileID: -4905828145612743050}
+  - {fileID: 3714851696818252332}
   MasterBanks:
   - {fileID: 4705297196903165758}
   StringsBanks:
   - {fileID: 315907521880794304}
-  cacheTime: 638172444247194203
+  cacheTime: 638172516540498562
   cacheVersion: 131603
 --- !u!114 &315907521880794304
 MonoBehaviour:
@@ -201,10 +234,10 @@ MonoBehaviour:
   Path: Assets/Audio/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638172444247194203
+  lastModified: 638172516540498562
   FileSizes:
   - Name: 
-    Value: 1586
+    Value: 1848
   Exists: 1
 --- !u!114 &467490723457131810
 MonoBehaviour:
@@ -233,6 +266,84 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 57722
+--- !u!114 &1503697538378336068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GameOver/Good
+  m_EditorClassIdentifier: 
+  Path: event:/GameOver/Good
+  Guid:
+    Data1: 404648228
+    Data2: 1093543471
+    Data3: -252566621
+    Data4: 1033932776
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4800
+--- !u!114 &3337717983831356253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GameOver/Okay
+  m_EditorClassIdentifier: 
+  Path: event:/GameOver/Okay
+  Guid:
+    Data1: -1270958628
+    Data2: 1093497762
+    Data3: 1978018217
+    Data4: 703181684
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4800
+--- !u!114 &3714851696818252332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WinStatus
+  m_EditorClassIdentifier: 
+  Name: WinStatus
+  StudioPath: parameter:/WinStatus
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 2507926090
+    data2: 2480302210
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &3808759159281972410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +414,7 @@ MonoBehaviour:
   Path: Assets/Audio/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638172444247134372
+  lastModified: 638172516540491368
   FileSizes: []
   Exists: 1
 --- !u!114 &5076334018107785834
@@ -435,7 +546,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 4000
+  Length: 700
 --- !u!114 &8577191996512882353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,6 +574,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2296
+--- !u!114 &8956851170159943794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GameOver/Lose
+  m_EditorClassIdentifier: 
+  Path: event:/GameOver/Lose
+  Guid:
+    Data1: 2118640565
+    Data2: 1107478965
+    Data3: -1748301385
+    Data4: 1157615618
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6000
 --- !u!114 &9052018696531716277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,3 +629,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 16000
+--- !u!114 &9117044234464286176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/TaskLose
+  m_EditorClassIdentifier: 
+  Path: event:/Music/TaskLose
+  Guid:
+    Data1: -854740894
+    Data2: 1224298105
+    Data3: 1444065925
+    Data4: 254942189
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 200
