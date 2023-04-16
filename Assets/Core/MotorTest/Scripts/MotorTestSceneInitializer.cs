@@ -12,14 +12,17 @@ namespace Core.MotorTest.Scripts
         IMillRotatorDependencies, 
         IQuickTimeSpinWheelDependencies,
         IQuickTimeTapButtonEventDependencies,
-        IQuickTimeTouchAndHoldButtonEventDependencies
+        IQuickTimeTouchAndHoldButtonEventDependencies,
+        ICrankQuickTimeEventDependencies
     {
+        [SerializeField] private CrankController crankController;
         [SerializeField] private TouchAndHoldButtonController touchAndHoldButtonController;
         [SerializeField] private TouchButtonController touchButtonController;
         [FormerlySerializedAs("tachoMotorController")] [SerializeField] private WaterMillMotorController waterMillMotorController;
         [SerializeField] private QuickTimeSpinWheelEvent spinWheelEvent;
         [SerializeField] private QuickTimeTapButtonEvent quickTimeTapButtonEvent;
         [SerializeField] private QuickTimeTouchAndHoldButtonEvent touchAndHoldButtonEvent;
+        [SerializeField] private CrankQuickTimeEvent crankQuickTimeEvent;
         public IButtonTapController TouchAndHoldController { get; private set; }
         public IButtonTapController TapController { get; private set; }
         private ITimer timer;
@@ -38,14 +41,16 @@ namespace Core.MotorTest.Scripts
             waterMillMotorController.WaitForInitialize(MotorInitialized);
             touchButtonController.WaitForInitialize(TouchSensorInitialized);
             touchAndHoldButtonController.WaitForInitialize(TouchAndHoldSensorInitialized);
+            crankController.WaitForInitialize(CrankInitialize);
             // spinWheelEvent.Initialize(this);
             // quickTimeTapButtonEvent.Initialize(this);
-            touchAndHoldButtonEvent.Initialize(this);
+            //touchAndHoldButtonEvent.Initialize(this);
+            crankQuickTimeEvent.Initialize(this);
         }
 
         private void StartEventCycle()
         {
-            touchAndHoldButtonEvent.PlayEvent();
+            crankQuickTimeEvent.PlayEvent();
         }
         
         private void MotorInitialized()
@@ -63,9 +68,15 @@ namespace Core.MotorTest.Scripts
             WaitForAllSensorsInitialized("touchAndHoldButton");
         }
 
-        private bool buttonInitialized;
-        private bool wheelMotorInitialized;
-        private bool touchAndHoldInitialized;
+        private void CrankInitialize()
+        {
+            WaitForAllSensorsInitialized("crank");
+        }
+
+        private bool buttonInitialized = false;
+        private bool wheelMotorInitialized = false;
+        private bool touchAndHoldInitialized = false;
+        private bool crankInitialized  = false;
         private void WaitForAllSensorsInitialized(string sensor)
         {
             switch (sensor)
@@ -79,10 +90,13 @@ namespace Core.MotorTest.Scripts
                 case "touchAndHoldButton":
                     touchAndHoldInitialized = true;
                     break;
+                case "crank":
+                    crankInitialized = true;
+                    break;
                 default: throw new ArgumentException("unkown sensor");
             }
 
-            if (buttonInitialized && wheelMotorInitialized && touchAndHoldInitialized)
+            if (buttonInitialized && wheelMotorInitialized && touchAndHoldInitialized && crankInitialized)
             {
                 StartGame();
             }
@@ -90,8 +104,7 @@ namespace Core.MotorTest.Scripts
 
         private void StartGame()
         {
-           // timer.StartTimer(0.2f, null, StartEventCycle);
-            waterMillMotorController.SpinInDirection(SpinDirection.Backward);
+           timer.StartTimer(0.2f, null, StartEventCycle);
         }
 
         public IVirtualMill Mill => waterMillMotorController;
@@ -105,5 +118,8 @@ namespace Core.MotorTest.Scripts
         public ISpinWheelInDirectionController SpinWheelController => waterMillMotorController;
 
         public SpinDirections DirectionsRequired { get; private set; }
+        public int TimeAllowed => 10;
+        public int RequiredPosition => 720;
+        public ICrankController CrankController => crankController;
     }
 }
