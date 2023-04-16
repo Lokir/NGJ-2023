@@ -75,8 +75,6 @@ namespace Core.Scripts
         private void DelayedCompleteEvent()
         {
             dependencies.CompleteEvent(new QuickTimeSpinWheelPayload(_success));
-            dependencies.Shower.Hide();
-
         }
     }
 }

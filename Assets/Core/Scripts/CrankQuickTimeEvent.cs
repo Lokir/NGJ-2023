@@ -83,6 +83,7 @@ namespace Core.Scripts
         
         private void EventComplete()
         {
+            crankTimer.StopTimer();
             CompleteEvent(motorRequiredPosition < cummulativeTargetPosition);
         }
         private bool _success = false;
@@ -100,7 +101,6 @@ namespace Core.Scripts
         }
         private void DelayedCompleteEvent()
         {
-            dependencies.Shower.Hide();
             dependencies.CompleteEvent(new QuickTimeTapButtonEventPayload(_success));
         }
     }

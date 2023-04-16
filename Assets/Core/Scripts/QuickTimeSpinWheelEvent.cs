@@ -127,7 +127,7 @@ namespace Core.Scripts
         {
             dependencies.Shower.Show(directionData.TargetDirection == SpinDirection.Backward ? rotateBackwards : rotateForwards);
             dependencies.SpinWheelController.StopSpinning();
-            dependencies.SpinWheelController.SpinInDirection(directionData.TargetDirection == SpinDirection.Backward ? SpinDirection.Backward : SpinDirection.Forward);
+            dependencies.SpinWheelController.SpinInDirection(directionData.TargetDirection == SpinDirection.Backward ? SpinDirection.Forward : SpinDirection.Backward);
             Debug.Log($"Please Spin the wheel: {directionData.TargetDirection}");
         }
 
@@ -167,7 +167,6 @@ namespace Core.Scripts
         private void DelayedCompleteEvent()
         {
             dependencies.CompleteEvent(new QuickTimeSpinWheelPayload(_success));
-            dependencies.Shower.Hide();
             dependencies.SpinWheelController.ClearSubscriptions();
             dependencies.SpinWheelController.StopSpinning();
         }
