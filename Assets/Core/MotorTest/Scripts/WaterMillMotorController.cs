@@ -50,12 +50,14 @@ namespace Core.MotorTest.Scripts
             actionToSubscribe = (t) => { };
         }
 
+        private ITimer timer;
         private TachoMotor motor;
         public void OnMotorInitialized()
         {
             IsInitialized = true;
             _newTargetPosition = (t) => { };
             motor = GetComponent<TachoMotor>();
+            timer = gameObject.AddComponent<TimerFixedUpdateLoop>();
             motor.Drift();
             tachoMotorInitialized.Invoke();
         }
@@ -72,34 +74,30 @@ namespace Core.MotorTest.Scripts
             _newTargetPosition += wheelMotionChangedEvent;
         }
 
-        public void OnPositionChanged()
-        {
-            if(motor.Speed != 0)
-                _newTargetPosition.Invoke(new WheelChangeEventPayload(motor.Position, IsMoving));
-        }
-
-        private SpinDirection currentSpinDirection;
+        private SpinDirection currentSpinDirection = SpinDirection.None;
         public void OnSpeedChanged()
         {
-            var direction = SpinDirection.None;
-            if (motor.Speed > 0) direction = SpinDirection.Backward;
-            else if (motor.Speed < 0) direction = SpinDirection.Forward;
-            
-            if (!MotorIsForciblyStopped() && IsMoving)
+            var direction = GetCurrentDirectionBasedOnMovement();
+
+            if (IsMoving && MotorIsForciblyStopped() && canStopAutomatically)
             {
-                StopMotor();
+                direction = SpinDirection.None;
             }
-            else if(!IsMoving)
-            {
-                AssignContinousMotorState(direction);
-            }
-            else if (IsMoving && IsNotSameDirection(direction))
+            Debug.Log(motor.Speed);
+            if (IsNotSameDirection(direction))
             {
                 Debug.Log($"Changing Direction: {direction}");
                 currentSpinDirection = direction;
                 actionToSubscribe.Invoke(new SpinDirectionPayload(direction));
-                AssignContinousMotorState(currentSpinDirection);
             }
+        }
+
+        private SpinDirection GetCurrentDirectionBasedOnMovement()
+        {
+            if (!IsMoving) return SpinDirection.None;
+            if (motor.Speed > 0) return SpinDirection.Forward;
+            if (motor.Speed < 0)return SpinDirection.Backward;
+            return SpinDirection.None;
         }
 
         private bool IsNotSameDirection(SpinDirection newSpinDirection)
@@ -111,12 +109,13 @@ namespace Core.MotorTest.Scripts
         private bool MotorIsForciblyStopped()
         {
             if (Mathf.Abs(motor.Speed) < 3f)
-                return false;
-            return true;
+                return true;
+            return false;
         }
         
         private void StopMotor()
         {
+            currentSpinDirection = SpinDirection.None;
             motor.SetSpeed(0);
             motor.SetPower(0);
             IsMoving = false;
@@ -124,8 +123,23 @@ namespace Core.MotorTest.Scripts
 
         private void AssignContinousMotorState(SpinDirection direction)
         {
+            if (direction == SpinDirection.None)
+                throw new ArgumentException("Don't call this method with direction None");
             IsMoving = true;
+            PauseMotorStop();
             SetSpeed(direction);
+        }
+
+        private bool canStopAutomatically = true;
+        private void PauseMotorStop()
+        {
+            timer.StartTimer(0.3f, null, UnpauseMotorStop);
+            canStopAutomatically = false;
+        }
+
+        public void UnpauseMotorStop()
+        {
+            canStopAutomatically = true;
         }
         
         private void SetSpeed(SpinDirection direction)
@@ -156,8 +170,14 @@ namespace Core.MotorTest.Scripts
 
         public void SpinInDirection(SpinDirection direction)
         {
-            currentSpinDirection = direction;
-            AssignContinousMotorState(direction);
+            if (direction == SpinDirection.None)
+            {
+                StopMotor();
+            }
+            else
+            {
+                AssignContinousMotorState(direction);
+            }
             Debug.Log("Spin In Direction");
         }
 
@@ -172,6 +192,11 @@ namespace Core.MotorTest.Scripts
             {
                 Debug.Log("Forwards!");
                 SpinInDirection(SpinDirection.Forward);
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Debug.Log("Forwards!");
+                SpinInDirection(SpinDirection.None);
             }
         }
     }

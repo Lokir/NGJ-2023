@@ -91,8 +91,7 @@ namespace Core.Scripts
     {
         None,
         Forward,
-        Backward,
-        Either
+        Backward
     }
     public class QuickTimeSpinWheelEvent : QuickTimeEvent, IQuickTimeSpinWheelEvent
     {
@@ -120,15 +119,15 @@ namespace Core.Scripts
 
         private void DisplayNextSpin(SpinDirectionData directionData)
         {
-            dependencies.SpinWheelController.SpinInDirection(directionData.TargetDirection == SpinDirection.Backward ? SpinDirection.Forward : SpinDirection.Backward);
+            //dependencies.SpinWheelController.SpinInDirection(directionData.TargetDirection == SpinDirection.Backward ? SpinDirection.Forward : SpinDirection.Backward);
             Debug.Log($"Spin direction: {directionData.TargetDirection}");
         }
 
         private void WheelSpun(ISpinDirectionPayload spinDirectionPayload)
         {
+            dependencies.SpinWheelController.SpinInDirection(spinDirectionPayload.Direction);
             var directionData = dependencies.DirectionsRequired.DirectionsRequired[idx];
-            if (directionData.TargetDirection == spinDirectionPayload.Direction ||
-                directionData.TargetDirection == SpinDirection.Either)
+            if (directionData.TargetDirection == spinDirectionPayload.Direction)
             {
                 dependencies.DirectionsRequired.MarkComplete(idx);
                 idx++;
