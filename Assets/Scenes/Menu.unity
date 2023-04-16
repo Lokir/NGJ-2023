@@ -282,6 +282,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+--- !u!1 &2025841395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4749281751938303167, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+  m_PrefabInstance: {fileID: 4749281752335836748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2025841398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025841395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1001 &4749281752335836748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -289,13 +325,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 638474934880847582, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 638474934880847582, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 638474934880847582, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4749281751366236193, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4749281753034028210, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4749281753099917408, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
       propertyPath: m_Pivot.x
