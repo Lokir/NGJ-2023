@@ -142,12 +142,15 @@ namespace Core.MotorTest.Scripts
             switch (quickTimeEvent)
             {
                 case IQuickTimeTouchAndHoldButtonEvent:
+                    Debug.Log("Touch and hold!");
                     touchAndHoldButtonEvent.Initialize(new QuickTimeTouchAndHoldButtonEventDependencies(QuickTimeEventCompleted, TouchAndHoldController, shower, lossSoundEmitter, winSoundEmitter));
                     break;
                 case IQuickTimeTapButtonEvent:
+                    Debug.Log("Tap!");
                     quickTimeTapButtonEvent.Initialize(new QuickTimeTapButtonDependencies(QuickTimeEventCompleted, TapController, shower, lossSoundEmitter, winSoundEmitter));
                     break;
                 case ICrankQuickTimeEvent:
+                    Debug.Log("Crank!");
                     crankQuickTimeEvent.Initialize(
                         new CrankQuickTimeEventDependencies(
                         QuickTimeEventCompleted, 
@@ -156,6 +159,7 @@ namespace Core.MotorTest.Scripts
                         crankController, shower, lossSoundEmitter, winSoundEmitter));
                     break;
                 case IQuickTimeSpinWheelEvent:
+                    Debug.Log("Wheel!");
                     spinWheelEvent.Initialize(
                         new QuickTimeSpinWheelDependencies(
                             QuickTimeEventCompleted,
