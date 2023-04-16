@@ -130,10 +130,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4749281751098576393, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281751098576394, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281751098576399, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281751467296170, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1782177437, guid: fe21c245cec3e4c8b82a10bf83ed2fb7, type: 3}
     - target: {fileID: 4749281751791493089, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4749281751905918563, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281751905918563, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1782177437, guid: fe21c245cec3e4c8b82a10bf83ed2fb7, type: 3}
     - target: {fileID: 4749281752335836753, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
       propertyPath: EventReference.Path
       value: event:/GameOver/Perfect

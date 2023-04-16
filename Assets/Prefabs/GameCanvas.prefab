@@ -368,7 +368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4749281751098576392
 RectTransform:
   m_ObjectHideFlags: 0
@@ -396,7 +396,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4749281751098576399}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!114 &4749281751098576393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4749281751098576399}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -575,7 +575,6 @@ GameObject:
   - component: {fileID: 4749281751320284115}
   - component: {fileID: 4749281751320284114}
   - component: {fileID: 4749281752335836754}
-  - component: {fileID: 1208462240516610462}
   m_Layer: 5
   m_Name: Result 2
   m_TagString: Untagged
@@ -656,11 +655,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 404648228
+      Data2: 1093543471
+      Data3: -252566621
+      Data4: 1033932776
+    Path: event:/GameOver/Good
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -670,39 +669,8 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
---- !u!114 &1208462240516610462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4749281751320284112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &4749281751330249226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,7 +1048,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1991093400, guid: 17f936922abbb4ab2a750b56a2141054, type: 3}
+  m_Sprite: {fileID: -1782177437, guid: fe21c245cec3e4c8b82a10bf83ed2fb7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1158,7 +1126,6 @@ GameObject:
   - component: {fileID: 4749281751701374317}
   - component: {fileID: 4749281751701374316}
   - component: {fileID: 4749281752335836756}
-  - component: {fileID: 3117704678262276534}
   m_Layer: 5
   m_Name: Result 0
   m_TagString: Untagged
@@ -1239,11 +1206,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 2118640565
+      Data2: 1107478965
+      Data3: -1748301385
+      Data4: 1157615618
+    Path: event:/GameOver/Lose
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -1253,39 +1220,8 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
---- !u!114 &3117704678262276534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4749281751701374290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &4749281751741625663
 GameObject:
   m_ObjectHideFlags: 0
@@ -6151,7 +6087,6 @@ GameObject:
   - component: {fileID: 4749281751856583261}
   - component: {fileID: 4749281751856583260}
   - component: {fileID: 4749281752335836755}
-  - component: {fileID: 5918280048858051986}
   m_Layer: 5
   m_Name: Result 1
   m_TagString: Untagged
@@ -6232,11 +6167,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1270958628
+      Data2: 1093497762
+      Data3: 1978018217
+      Data4: 703181684
+    Path: event:/GameOver/Okay
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -6246,39 +6181,8 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
---- !u!114 &5918280048858051986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4749281751856583234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &4749281751872356991
 GameObject:
   m_ObjectHideFlags: 0
@@ -6373,11 +6277,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 47763897
+      Data2: 1238867837
+      Data3: -735476053
+      Data4: -1395817629
+    Path: event:/GameOver/Perfect
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -6387,8 +6291,8 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &1669058329769591655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6488,8 +6392,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -1782177437, guid: fe21c245cec3e4c8b82a10bf83ed2fb7, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11800,8 +11704,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a96eadb8e6da64d8eb29ac61206711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
   menuPanel: {fileID: 4749281751366236193}
-  gameScreen: {fileID: 0}
+  gameScreen: {fileID: 4749281751791493089}
 --- !u!114 &1039875630
 MonoBehaviour:
   m_ObjectHideFlags: 0
