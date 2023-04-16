@@ -38,8 +38,8 @@ namespace Core.MotorTest.Scripts
             waterMillMotorController.WaitForInitialize(MotorInitialized);
             touchButtonController.WaitForInitialize(TouchSensorInitialized);
             touchAndHoldButtonController.WaitForInitialize(TouchAndHoldSensorInitialized);
-            spinWheelEvent.Initialize(this);
-            quickTimeTapButtonEvent.Initialize(this);
+            // spinWheelEvent.Initialize(this);
+            // quickTimeTapButtonEvent.Initialize(this);
             touchAndHoldButtonEvent.Initialize(this);
         }
 

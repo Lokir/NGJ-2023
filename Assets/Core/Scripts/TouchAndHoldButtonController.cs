@@ -33,7 +33,7 @@ namespace Core.Scripts
             if (forceSensor.Force > 60)
             {
                 didPressThisCycle = true;
-                timer.StartTimer(5f, CheckIfStillBeingHeld, HoldComplete);
+                timer.StartTimer(2f, CheckIfStillBeingHeld, HoldComplete);
             }
         }
 
