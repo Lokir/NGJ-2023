@@ -7,13 +7,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.coffee.ui-particle": {
-      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "a499f0c04670e6e52893799f02a30aa7b5b4db05"
-    },
     "com.lego.core": {
       "version": "0.0.3",
       "depth": 1,
@@ -61,16 +54,6 @@
         "com.lego.materials": "0.3.4",
         "com.unity.render-pipelines.universal": "12.1.2",
         "com.unity.sharp-zip-lib": "1.3.2-preview"
-      },
-      "url": "https://upm.services.lego.com/public"
-    },
-    "com.lego.wirelesssdk": {
-      "version": "0.1.2",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.lego.materials": "0.3.1",
-        "com.unity.textmeshpro": "3.0.6"
       },
       "url": "https://upm.services.lego.com/public"
     },

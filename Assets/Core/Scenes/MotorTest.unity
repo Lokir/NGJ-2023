@@ -351,120 +351,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   mode: 3
---- !u!1 &1700523534
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1700523535}
-  - component: {fileID: 1700523537}
-  - component: {fileID: 1700523536}
-  m_Layer: 0
-  m_Name: Tacho Motor With Absolute Position
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1700523535
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700523534}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1715894068}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1700523536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700523534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d06a64c6417dea40835f4842860f52d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1700523537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700523534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe4ec8c868d624eea8a338274102f0b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsConnectedChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1700523536}
-        m_TargetAssemblyTypeName: Core.MotorTest.Scripts.WaterMillMotorController,
-          Assembly-CSharp
-        m_MethodName: OnMotorInitialized
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  isInternal: 0
-  port: -1
-  typeBitMask: -1
-  virtualConn: 0
-  PositionChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1700523536}
-        m_TargetAssemblyTypeName: Core.MotorTest.Scripts.WaterMillMotorController,
-          Assembly-CSharp
-        m_MethodName: OnPositionChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  SpeedChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1700523536}
-        m_TargetAssemblyTypeName: Core.MotorTest.Scripts.WaterMillMotorController,
-          Assembly-CSharp
-        m_MethodName: OnSpeedChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  PowerChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  mode: 0
-  modeWithAbsolute: 3
 --- !u!1 &1715894062
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +475,6 @@ MonoBehaviour:
   - {fileID: 1715894063}
   externalServices:
   - {fileID: 1585985376}
-  - {fileID: 1700523537}
   IsConnectedChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -609,7 +494,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1585985374}
-  - {fileID: 1700523535}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -624,6 +508,7 @@ GameObject:
   - component: {fileID: 1791777567}
   - component: {fileID: 1791777566}
   - component: {fileID: 1791777568}
+  - component: {fileID: 1791777569}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -643,8 +528,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de5b6d499452c645950908f84362924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterMillMotorController: {fileID: 1700523536}
+  waterMillMotorController: {fileID: 1585985375}
   spinWheelEvent: {fileID: 1791777568}
+  quickTimeTapButtonEvent: {fileID: 1791777569}
 --- !u!4 &1791777567
 Transform:
   m_ObjectHideFlags: 0
@@ -670,6 +556,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e653c37937d621144858ce5b8474f98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1791777569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791777565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea888848403647740869da3af6112a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1963194280

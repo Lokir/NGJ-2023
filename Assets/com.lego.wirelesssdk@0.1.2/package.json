@@ -1,0 +1,22 @@
+{
+  "name": "com.lego.wirelesssdk",
+  "displayName": "LEGO Wireless SDK",
+  "version": "0.1.2",
+  "unity": "2021.3",
+  "unityRelease": "1f1",
+  "description": "Connect to and interact with Bluetooth enabled LEGO\u00ae hardware.\n\n\u25aa Easily setup and connect to LEGO\u00ae Technic Hubs and other hardware.\n\u25aa Control motors and sensors.\n\u25aa Connect physical LEGO\u00ae models to your Unity project.",
+  "samples": [
+    {
+      "displayName": "Basic Connection Sample",
+      "description": "Shows basic connections",
+      "path": "Samples~/Basic Connection Sample"
+    }
+  ],
+  "dependencies": {
+    "com.lego.materials": "0.3.1",
+    "com.unity.textmeshpro": "3.0.6"
+  },
+  "author": {
+    "name": "LEGO Games"
+  }
+}
