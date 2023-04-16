@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
+using UnityEngine.Serialization;
 
 namespace Core.Scripts
 {
@@ -95,6 +98,8 @@ namespace Core.Scripts
     }
     public class QuickTimeSpinWheelEvent : QuickTimeEvent, IQuickTimeSpinWheelEvent
     {
+        [SerializeField] private Sprite rotateForwards;
+        [SerializeField] private Sprite rotateBackwards;
         private IQuickTimeSpinWheelDependencies dependencies;
         public override void Initialize(IQuickTimeEventDependencies quicktimeDependencies)
         {
@@ -120,8 +125,9 @@ namespace Core.Scripts
 
         private void DisplayNextSpin(SpinDirectionData directionData)
         {
+            dependencies.Shower.Show(directionData.TargetDirection == SpinDirection.Backward ? rotateBackwards : rotateForwards);
             dependencies.SpinWheelController.StopSpinning();
-            dependencies.SpinWheelController.SpinInDirection(directionData.TargetDirection == SpinDirection.Backward ? SpinDirection.Forward : SpinDirection.Backward);
+            dependencies.SpinWheelController.SpinInDirection(directionData.TargetDirection == SpinDirection.Backward ? SpinDirection.Backward : SpinDirection.Forward);
             Debug.Log($"Please Spin the wheel: {directionData.TargetDirection}");
         }
 
@@ -146,9 +152,22 @@ namespace Core.Scripts
             }
         }
 
+        private bool _success = false;
         private void CompleteEvent(bool success)
         {
-            dependencies.CompleteEvent(new QuickTimeSpinWheelPayload(success));
+            _success = success;
+            if(success)
+                dependencies.WinSoundEmitter.Play();
+            else 
+                dependencies.LossSoundEmitter.Play();
+
+            Invoke("DelayedCompleteEvent", 2f);
+        }
+
+        private void DelayedCompleteEvent()
+        {
+            dependencies.CompleteEvent(new QuickTimeSpinWheelPayload(_success));
+            dependencies.Shower.Hide();
             dependencies.SpinWheelController.ClearSubscriptions();
             dependencies.SpinWheelController.StopSpinning();
         }

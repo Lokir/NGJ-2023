@@ -6,7 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Samples/LEGO Wireless SDK/0.1.0/Basic Connection Sample/Scenes/Sample
-      Scene.unity
-    guid: 5c57f8106731e4b1388afea2d7c969c0
+    path: Assets/Scenes/Menu.unity
+    guid: 7d24ac14dbbf5a94d95a6630ca689d57
+  - enabled: 1
+    path: Assets/Core/Scenes/MotorTest.unity
+    guid: ea05ae8e80b15c54ab25a1ffbf6c09c1
   m_configObjects: {}

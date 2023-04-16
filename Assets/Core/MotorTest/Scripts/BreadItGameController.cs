@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Scripts;
+using FMODUnity;
 using Helpers;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,13 +15,19 @@ namespace Core.MotorTest.Scripts
         public QuickTimeSpinWheelDependencies(
             Action<IQuickTimeEventPayload> completeEvent, 
             ISpinWheelInDirectionController spinWheelController, 
-            SpinDirections directionsRequired)
+            SpinDirections directionsRequired, QuicktimeShower shower, StudioEventEmitter lossSoundEmitter, StudioEventEmitter winSoundEmitter)
         {
             CompleteEvent = completeEvent;
             SpinWheelController = spinWheelController;
             DirectionsRequired = directionsRequired;
+            Shower = shower;
+            LossSoundEmitter = lossSoundEmitter;
+            WinSoundEmitter = winSoundEmitter;
         }
 
+        public QuicktimeShower Shower { get; }
+        public StudioEventEmitter LossSoundEmitter { get; }
+        public StudioEventEmitter WinSoundEmitter { get; }
         public Action<IQuickTimeEventPayload> CompleteEvent { get; }
         public ISpinWheelInDirectionController SpinWheelController { get; }
         public SpinDirections DirectionsRequired { get; }
@@ -30,12 +37,18 @@ namespace Core.MotorTest.Scripts
     {
         public QuickTimeTapButtonDependencies(
             Action<IQuickTimeEventPayload> completeEvent, 
-            IButtonTapController tapController)
+            IButtonTapController tapController, QuicktimeShower shower, StudioEventEmitter lossSoundEmitter, StudioEventEmitter winSoundEmitter)
         {
             CompleteEvent = completeEvent;
             TapController = tapController;
+            Shower = shower;
+            LossSoundEmitter = lossSoundEmitter;
+            WinSoundEmitter = winSoundEmitter;
         }
 
+        public QuicktimeShower Shower { get; }
+        public StudioEventEmitter LossSoundEmitter { get; }
+        public StudioEventEmitter WinSoundEmitter { get; }
         public Action<IQuickTimeEventPayload> CompleteEvent { get; }
         public IButtonTapController TapController { get; }
     }
@@ -44,12 +57,18 @@ namespace Core.MotorTest.Scripts
     {
         public QuickTimeTouchAndHoldButtonEventDependencies(
             Action<IQuickTimeEventPayload> completeEvent, 
-            IButtonTapController touchAndHoldController)
+            IButtonTapController touchAndHoldController, QuicktimeShower shower, StudioEventEmitter lossSoundEmitter, StudioEventEmitter winSoundEmitter)
         {
             CompleteEvent = completeEvent;
             TouchAndHoldController = touchAndHoldController;
+            Shower = shower;
+            LossSoundEmitter = lossSoundEmitter;
+            WinSoundEmitter = winSoundEmitter;
         }
 
+        public QuicktimeShower Shower { get; }
+        public StudioEventEmitter LossSoundEmitter { get; }
+        public StudioEventEmitter WinSoundEmitter { get; }
         public Action<IQuickTimeEventPayload> CompleteEvent { get; }
         public IButtonTapController TouchAndHoldController { get; }
     }
@@ -60,14 +79,20 @@ namespace Core.MotorTest.Scripts
             Action<IQuickTimeEventPayload> completeEvent, 
             int timeAllowed, 
             int requiredPosition, 
-            ICrankController crankController)
+            ICrankController crankController, QuicktimeShower shower, StudioEventEmitter lossSoundEmitter, StudioEventEmitter winSoundEmitter)
         {
             CompleteEvent = completeEvent;
             TimeAllowed = timeAllowed;
             RequiredPosition = requiredPosition;
             CrankController = crankController;
+            Shower = shower;
+            LossSoundEmitter = lossSoundEmitter;
+            WinSoundEmitter = winSoundEmitter;
         }
 
+        public QuicktimeShower Shower { get; }
+        public StudioEventEmitter LossSoundEmitter { get; }
+        public StudioEventEmitter WinSoundEmitter { get; }
         public Action<IQuickTimeEventPayload> CompleteEvent { get; }
         public int TimeAllowed { get; }
         public int RequiredPosition { get; }
@@ -77,6 +102,11 @@ namespace Core.MotorTest.Scripts
         MonoBehaviour, 
         IMillRotatorDependencies
     {
+
+        [SerializeField] private QuicktimeShower shower;
+        [SerializeField] private StudioEventEmitter lossSoundEmitter;
+        [SerializeField] private StudioEventEmitter winSoundEmitter;
+        
         [SerializeField] private CrankController crankController;
         [SerializeField] private TouchAndHoldButtonController touchAndHoldButtonController;
         [SerializeField] private TouchButtonController touchButtonController;
@@ -110,10 +140,10 @@ namespace Core.MotorTest.Scripts
             switch (quickTimeEvent)
             {
                 case IQuickTimeTouchAndHoldButtonEvent:
-                    touchAndHoldButtonEvent.Initialize(new QuickTimeTouchAndHoldButtonEventDependencies(QuickTimeEventCompleted, TouchAndHoldController));
+                    touchAndHoldButtonEvent.Initialize(new QuickTimeTouchAndHoldButtonEventDependencies(QuickTimeEventCompleted, TouchAndHoldController, shower, lossSoundEmitter, winSoundEmitter));
                     break;
                 case IQuickTimeTapButtonEvent:
-                    quickTimeTapButtonEvent.Initialize(new QuickTimeTapButtonDependencies(QuickTimeEventCompleted, TapController));
+                    quickTimeTapButtonEvent.Initialize(new QuickTimeTapButtonDependencies(QuickTimeEventCompleted, TapController, shower, lossSoundEmitter, winSoundEmitter));
                     break;
                 case ICrankQuickTimeEvent:
                     crankQuickTimeEvent.Initialize(
@@ -121,14 +151,14 @@ namespace Core.MotorTest.Scripts
                         QuickTimeEventCompleted, 
                         15, 
                         ProvideCrankRange(),
-                        crankController));
+                        crankController, shower, lossSoundEmitter, winSoundEmitter));
                     break;
                 case IQuickTimeSpinWheelEvent:
                     spinWheelEvent.Initialize(
                         new QuickTimeSpinWheelDependencies(
                             QuickTimeEventCompleted,
                             waterMillMotorController,
-                            ProvideSpinDirections()));
+                            ProvideSpinDirections(), shower, lossSoundEmitter, winSoundEmitter));
                     break;
             }
         }

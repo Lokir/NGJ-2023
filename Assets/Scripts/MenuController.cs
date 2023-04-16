@@ -1,10 +1,14 @@
+using System;
+using Core.MotorTest.Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
+    [SerializeField] private BreadItGameController gameController;
     public GameObject menuPanel, gameScreen;
     bool paused;
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)){
             PauseGame(paused);
@@ -23,7 +27,7 @@ public class MenuController : MonoBehaviour
     public void StartLevel() {
         menuPanel.SetActive(false);
         gameObject.SetActive(true);
-        //Call funciton to start the Quicktime Events
+        gameController.StartGame();
     }
 
     public void Quit() {
