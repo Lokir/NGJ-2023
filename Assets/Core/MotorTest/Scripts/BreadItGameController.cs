@@ -238,12 +238,13 @@ namespace Core.MotorTest.Scripts
             }
         }
 
-        public void StartGame()
+        public bool StartGame()
         {
-            if (!IsReady) return;
+            if (!IsReady) return false;
             idx = 0;
             eventsToGoThrough = eventsToGoThrough.OrderBy(a => Guid.NewGuid()).ToList();
             ProgressEventCycle();
+            return true;
         }
 
         public IVirtualMill Mill => waterMillMotorController;

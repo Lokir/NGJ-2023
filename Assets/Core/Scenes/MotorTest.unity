@@ -130,6 +130,122 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4749281751791493089, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836753, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Path
+      value: event:/GameOver/Perfect
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836753, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836753, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836753, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 47763897
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836753, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1238867837
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836753, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -735476053
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836753, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: -1395817629
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836754, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Path
+      value: event:/GameOver/Good
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836754, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836754, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836754, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 404648228
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836754, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1093543471
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836754, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -252566621
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836754, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 1033932776
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836755, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Path
+      value: event:/GameOver/Okay
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836755, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836755, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836755, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: -1270958628
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836755, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1093497762
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836755, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: 1978018217
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836755, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 703181684
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836756, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Path
+      value: event:/GameOver/Lose
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836756, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836756, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836756, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 2118640565
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836756, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1107478965
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836756, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -1748301385
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749281752335836756, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 1157615618
+      objectReference: {fileID: 0}
     - target: {fileID: 4749281753099917408, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -226,7 +342,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameCanvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3117704678262276534, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+    - {fileID: 5918280048858051986, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
+    - {fileID: 1208462240516610462, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 418dd5c8c7ff44e42a087fc326b7840d, type: 3}
 --- !u!1 &808950548 stripped
 GameObject:
@@ -773,6 +892,8 @@ GameObject:
   - component: {fileID: 1791777569}
   - component: {fileID: 1791777570}
   - component: {fileID: 1791777571}
+  - component: {fileID: 1791777573}
+  - component: {fileID: 1791777572}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -794,8 +915,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endScoreManager: {fileID: 808950550}
   shower: {fileID: 808950549}
-  lossSoundEmitter: {fileID: 0}
-  winSoundEmitter: {fileID: 0}
+  lossSoundEmitter: {fileID: 1791777572}
+  winSoundEmitter: {fileID: 1791777573}
   crankController: {fileID: 1484983168}
   touchAndHoldButtonController: {fileID: 1150071858}
   touchButtonController: {fileID: 1150071857}
@@ -840,8 +961,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e653c37937d621144858ce5b8474f98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateForwards: {fileID: 0}
-  rotateBackwards: {fileID: 0}
+  rotateForwards: {fileID: 21300000, guid: cffb40682ff5d43679b931e3ceebb84c, type: 3}
+  rotateBackwards: {fileID: 21300000, guid: 35d57c22151984128acd5ebb20bec3a0, type: 3}
 --- !u!114 &1791777569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,7 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea888848403647740869da3af6112a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tapImage: {fileID: 0}
+  tapImage: {fileID: 21300000, guid: 09c3a1b3638a34119a5b24d50dc73fed, type: 3}
 --- !u!114 &1791777570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -867,7 +988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00827580fc478644838ea7294fa97d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tapAndHoldImage: {fileID: 0}
+  tapAndHoldImage: {fileID: 21300000, guid: f8168a31e25fc45cb9de1857c135c917, type: 3}
 --- !u!114 &1791777571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,5 +1001,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61794773f73763c48b5c41b768f13363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateForwards: {fileID: 0}
-  rotateBackwards: {fileID: 0}
+  rotateForwards: {fileID: 21300000, guid: 171be1e3125c8456fb65e9334ffec0fc, type: 3}
+  rotateBackwards: {fileID: 21300000, guid: 3b6a08d05f2df4336aa3de1d2376b279, type: 3}
+--- !u!114 &1791777572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791777565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -854740894
+      Data2: 1224298105
+      Data3: 1444065925
+      Data4: 254942189
+    Path: event:/Music/TaskLose
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1791777573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791777565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 831164985
+      Data2: 1308412407
+      Data3: -1846001268
+      Data4: -61054759
+    Path: event:/Music/TaskWin
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

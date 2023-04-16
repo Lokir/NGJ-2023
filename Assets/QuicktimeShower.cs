@@ -7,7 +7,6 @@ public class QuicktimeShower : MonoBehaviour
     [SerializeField] Image img;
     private void Start() {
         img = GetComponentInChildren<Image>(true);
-        Hide();
     }
     public QuicktimeShower Factory(Transform parent) {
         var instance = Instantiate(this, parent);

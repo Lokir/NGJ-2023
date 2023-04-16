@@ -16,7 +16,7 @@ public class MenuController : MonoBehaviour
     private void PauseGame(bool pauseState) {
         paused = !paused;
         menuPanel.SetActive(paused);
-        gameObject.SetActive(!paused);
+        gameScreen.SetActive(!paused);
     }
 
     public void LoadLevel(int levelBuildIncex)
@@ -25,9 +25,11 @@ public class MenuController : MonoBehaviour
     }  
 
     public void StartLevel() {
-        menuPanel.SetActive(false);
-        gameObject.SetActive(true);
-        gameController.StartGame();
+        if (gameController.StartGame())
+        {
+            menuPanel.SetActive(false);
+            gameScreen.SetActive(true);
+        }
     }
 
     public void Quit() {

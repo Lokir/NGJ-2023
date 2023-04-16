@@ -41,7 +41,7 @@ namespace Core.Scripts
         private SpinDirection GetCurrentDirectionBasedOnMovement()
         {
             if (motor.Speed > 0) return SpinDirection.Forward;
-            if (motor.Speed < 0)return SpinDirection.Backward;
+            if (motor.Speed < 0) return SpinDirection.Backward;
             return SpinDirection.None;
         }
 
