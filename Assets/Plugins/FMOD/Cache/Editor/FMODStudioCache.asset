@@ -1,5 +1,155 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9030537094353148087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/StreamLoop
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/StreamLoop
+  Guid:
+    Data1: -805276890
+    Data2: 1274685149
+    Data3: -431191910
+    Data4: -169821991
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 36556
+--- !u!114 &-7854288648677377093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WheelMain2/WheelStatus
+  m_EditorClassIdentifier: 
+  Name: WheelStatus
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3093570218
+    data2: 4208484083
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-4905828145612743050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WheelSpeed
+  m_EditorClassIdentifier: 
+  Name: WheelSpeed
+  StudioPath: parameter:/WheelSpeed
+  Min: 0
+  Max: 1
+  Default: 0.2
+  ID:
+    data1: 2414548616
+    data2: 591220151
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-4446925032718163837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WheelStatus
+  m_EditorClassIdentifier: 
+  Name: WheelStatus
+  StudioPath: parameter:/WheelStatus
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3093570218
+    data2: 4208484083
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-3265174757802381337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ducks/WheelStatus
+  m_EditorClassIdentifier: 
+  Name: WheelStatus
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3093570218
+    data2: 4208484083
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-1479943846529962792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/old/Simlish
+  m_EditorClassIdentifier: 
+  Path: event:/old/Simlish
+  Guid:
+    Data1: -451985078
+    Data2: 1339797893
+    Data3: 1994723236
+    Data4: 1729426368
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10000
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,10 +162,332 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
-  EditorParameters: []
-  MasterBanks: []
-  StringsBanks: []
-  cacheTime: 0
+  EditorBanks:
+  - {fileID: 315907521880794304}
+  - {fileID: 4705297196903165758}
+  EditorEvents:
+  - {fileID: 8577191996512882353}
+  - {fileID: -9030537094353148087}
+  - {fileID: 8305788806585180434}
+  - {fileID: -1479943846529962792}
+  - {fileID: 8174651913207834952}
+  - {fileID: 6520467619857370519}
+  - {fileID: 3808759159281972410}
+  - {fileID: 4430213422828189449}
+  - {fileID: 9052018696531716277}
+  - {fileID: 467490723457131810}
+  EditorParameters:
+  - {fileID: -4446925032718163837}
+  - {fileID: 5076334018107785834}
+  - {fileID: -4905828145612743050}
+  MasterBanks:
+  - {fileID: 4705297196903165758}
+  StringsBanks:
+  - {fileID: 315907521880794304}
+  cacheTime: 638172444247194203
   cacheVersion: 131603
+--- !u!114 &315907521880794304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638172444247194203
+  FileSizes:
+  - Name: 
+    Value: 1586
+  Exists: 1
+--- !u!114 &467490723457131810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WaterWheel/WoodWheel
+  m_EditorClassIdentifier: 
+  Path: event:/WaterWheel/WoodWheel
+  Guid:
+    Data1: -1789238790
+    Data2: 1107653050
+    Data3: -274381384
+    Data4: -2004092798
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 57722
+--- !u!114 &3808759159281972410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WaterWheel/SplashingS
+  m_EditorClassIdentifier: 
+  Path: event:/WaterWheel/SplashingS
+  Guid:
+    Data1: -1381122957
+    Data2: 1130992032
+    Data3: -1317249905
+    Data4: 1725576017
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 26952
+--- !u!114 &4430213422828189449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/ThemeLoop
+  m_EditorClassIdentifier: 
+  Path: event:/Music/ThemeLoop
+  Guid:
+    Data1: 262380257
+    Data2: 1141983376
+    Data3: -1787572558
+    Data4: -754525125
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 6278081339035862100}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 53343
+--- !u!114 &4705297196903165758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638172444247134372
+  FileSizes: []
+  Exists: 1
+--- !u!114 &5076334018107785834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicLooping
+  m_EditorClassIdentifier: 
+  Name: MusicLooping
+  StudioPath: parameter:/MusicLooping
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 464159385
+    data2: 1043517506
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &6278081339035862100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ThemeLoop/MusicLooping
+  m_EditorClassIdentifier: 
+  Name: MusicLooping
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 464159385
+    data2: 1043517506
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &6520467619857370519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WheelMain2
+  m_EditorClassIdentifier: 
+  Path: event:/WheelMain2
+  Guid:
+    Data1: -509456795
+    Data2: 1231652234
+    Data3: -282672727
+    Data4: -1340463434
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7854288648677377093}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8174651913207834952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WaterWheel/SplashingM
+  m_EditorClassIdentifier: 
+  Path: event:/WaterWheel/SplashingM
+  Guid:
+    Data1: 1665664336
+    Data2: 1311334587
+    Data3: -1610665836
+    Data4: 1838248124
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 29843
+--- !u!114 &8305788806585180434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/TaskWin
+  m_EditorClassIdentifier: 
+  Path: event:/Music/TaskWin
+  Guid:
+    Data1: 831164985
+    Data2: 1308412407
+    Data3: -1846001268
+    Data4: -61054759
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
+--- !u!114 &8577191996512882353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WaterWheel/StopWheel
+  m_EditorClassIdentifier: 
+  Path: event:/WaterWheel/StopWheel
+  Guid:
+    Data1: 675684096
+    Data2: 1208653254
+    Data3: -1195682389
+    Data4: -594441184
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2296
+--- !u!114 &9052018696531716277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/Ducks
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/Ducks
+  Guid:
+    Data1: -755048969
+    Data2: 1278748423
+    Data3: -877782873
+    Data4: 310407021
+  Banks:
+  - {fileID: 4705297196903165758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3265174757802381337}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 16000

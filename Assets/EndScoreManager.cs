@@ -24,10 +24,13 @@ public class EndScoreManager : MonoBehaviour
 
     public void UpdateScore(int value) {
         score += value;
+        
+        /*
         gameNumber++;
         if (gameNumber == numberOfGames) {
             GameOver(score / 2);
         }
+        */
     }
 
     public int GetScore() {
