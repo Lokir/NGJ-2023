@@ -5,9 +5,9 @@ namespace Core.Scripts
 {
     public class DummyButtonTapController : MonoBehaviour, IButtonTapController
     {
-        private Action<IQuickTimeTapButtonEventPayload> actionToSubscribe;
+        private Action<IQuickTimeEventPayload> actionToSubscribe;
         public void SubscribeToSpinDirectionEvent(
-            Action<IQuickTimeTapButtonEventPayload> actionToSubscribe)
+            Action<IQuickTimeEventPayload> actionToSubscribe)
         {
             this.actionToSubscribe = actionToSubscribe;
         }
@@ -15,6 +15,10 @@ namespace Core.Scripts
         public void ClearSubscriptions()
         {
             this.actionToSubscribe = null;
+        }
+
+        public void Reset()
+        {
         }
 
         public void Update()

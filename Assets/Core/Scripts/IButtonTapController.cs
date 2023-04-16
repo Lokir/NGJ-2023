@@ -4,7 +4,8 @@ namespace Core.Scripts
 {
     public interface IButtonTapController 
     {
-        void SubscribeToSpinDirectionEvent(Action<IQuickTimeTapButtonEventPayload> actionToSubscribe);
+        void SubscribeToSpinDirectionEvent(Action<IQuickTimeEventPayload> actionToSubscribe);
         void ClearSubscriptions();
+        void Reset();
     }
 }

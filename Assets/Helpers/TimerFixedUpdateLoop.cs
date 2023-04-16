@@ -12,6 +12,7 @@ namespace Helpers
 
         public float TargetTime { get; private set; }
         public float TimeElapsed { get; private set; }
+        public bool IsRunning => this.enabled;
         private Action<float> step;
         private Action completed;
         public void StartTimer(float targetTime, Action<float> step = null, Action completed = null)

@@ -52,7 +52,7 @@ namespace Core.Scripts
             CompleteEvent(false);
         }
 
-        private void ButtonTapped(IQuickTimeTapButtonEventPayload payload)
+        private void ButtonTapped(IQuickTimeEventPayload payload)
         {
             CompleteEvent(payload.Success);
         }
