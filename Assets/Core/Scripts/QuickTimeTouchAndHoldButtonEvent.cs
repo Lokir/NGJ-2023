@@ -36,6 +36,7 @@ namespace Core.Scripts
             {
                 dependencies = newDependencies;
                 dependencies.TouchAndHoldController.SubscribeToSpinDirectionEvent(ButtonTapped);
+                dependencies.TouchAndHoldController.Reset();
 
             }
             else throw new ArgumentException("Wrong dependency type given.");
@@ -61,6 +62,7 @@ namespace Core.Scripts
         {
             dependencies.CompleteEvent(new QuickTimeTapButtonEventPayload(success));
             dependencies.TouchAndHoldController.ClearSubscriptions();
+            dependencies.TouchAndHoldController.Reset();
         }
     }
 }

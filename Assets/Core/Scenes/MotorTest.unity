@@ -783,6 +783,15 @@ MonoBehaviour:
   quickTimeTapButtonEvent: {fileID: 1791777569}
   touchAndHoldButtonEvent: {fileID: 1791777570}
   crankQuickTimeEvent: {fileID: 1791777571}
+  eventsToGoThrough:
+  - {fileID: 1791777570}
+  - {fileID: 1791777568}
+  - {fileID: 1791777569}
+  - {fileID: 1791777571}
+  - {fileID: 1791777570}
+  - {fileID: 1791777568}
+  - {fileID: 1791777571}
+  - {fileID: 1791777569}
 --- !u!4 &1791777567
 Transform:
   m_ObjectHideFlags: 0

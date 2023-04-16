@@ -4,16 +4,77 @@ using Core.Scripts;
 using Helpers;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Core.MotorTest.Scripts
 {
+    public class QuickTimeSpinWheelDependencies : IQuickTimeSpinWheelDependencies
+    {
+        public QuickTimeSpinWheelDependencies(
+            Action<IQuickTimeEventPayload> completeEvent, 
+            ISpinWheelInDirectionController spinWheelController, 
+            SpinDirections directionsRequired)
+        {
+            CompleteEvent = completeEvent;
+            SpinWheelController = spinWheelController;
+            DirectionsRequired = directionsRequired;
+        }
+
+        public Action<IQuickTimeEventPayload> CompleteEvent { get; }
+        public ISpinWheelInDirectionController SpinWheelController { get; }
+        public SpinDirections DirectionsRequired { get; }
+    }
+
+    public class QuickTimeTapButtonDependencies : IQuickTimeTapButtonEventDependencies
+    {
+        public QuickTimeTapButtonDependencies(
+            Action<IQuickTimeEventPayload> completeEvent, 
+            IButtonTapController tapController)
+        {
+            CompleteEvent = completeEvent;
+            TapController = tapController;
+        }
+
+        public Action<IQuickTimeEventPayload> CompleteEvent { get; }
+        public IButtonTapController TapController { get; }
+    }
+
+    public class QuickTimeTouchAndHoldButtonEventDependencies : IQuickTimeTouchAndHoldButtonEventDependencies
+    {
+        public QuickTimeTouchAndHoldButtonEventDependencies(
+            Action<IQuickTimeEventPayload> completeEvent, 
+            IButtonTapController touchAndHoldController)
+        {
+            CompleteEvent = completeEvent;
+            TouchAndHoldController = touchAndHoldController;
+        }
+
+        public Action<IQuickTimeEventPayload> CompleteEvent { get; }
+        public IButtonTapController TouchAndHoldController { get; }
+    }
+
+    public class CrankQuickTimeEventDependencies : ICrankQuickTimeEventDependencies
+    {
+        public CrankQuickTimeEventDependencies(
+            Action<IQuickTimeEventPayload> completeEvent, 
+            int timeAllowed, 
+            int requiredPosition, 
+            ICrankController crankController)
+        {
+            CompleteEvent = completeEvent;
+            TimeAllowed = timeAllowed;
+            RequiredPosition = requiredPosition;
+            CrankController = crankController;
+        }
+
+        public Action<IQuickTimeEventPayload> CompleteEvent { get; }
+        public int TimeAllowed { get; }
+        public int RequiredPosition { get; }
+        public ICrankController CrankController { get; }
+    }
     public class MotorTestSceneInitializer : 
         MonoBehaviour, 
-        IMillRotatorDependencies, 
-        IQuickTimeSpinWheelDependencies,
-        IQuickTimeTapButtonEventDependencies,
-        IQuickTimeTouchAndHoldButtonEventDependencies,
-        ICrankQuickTimeEventDependencies
+        IMillRotatorDependencies
     {
         [SerializeField] private CrankController crankController;
         [SerializeField] private TouchAndHoldButtonController touchAndHoldButtonController;
@@ -23,17 +84,14 @@ namespace Core.MotorTest.Scripts
         [SerializeField] private QuickTimeTapButtonEvent quickTimeTapButtonEvent;
         [SerializeField] private QuickTimeTouchAndHoldButtonEvent touchAndHoldButtonEvent;
         [SerializeField] private CrankQuickTimeEvent crankQuickTimeEvent;
+
+        private int idx = 0;
+        [SerializeField] private List<QuickTimeEvent> eventsToGoThrough;
         public IButtonTapController TouchAndHoldController { get; private set; }
         public IButtonTapController TapController { get; private set; }
         private ITimer timer;
         public void Awake()
         {
-            DirectionsRequired = new SpinDirections(
-                new List<SpinDirectionData>()
-                {
-                    new SpinDirectionData(SpinDirection.Backward, 3), 
-                    new SpinDirectionData(SpinDirection.Forward, 3), 
-                });
             timer = gameObject.AddComponent<TimerFixedUpdateLoop>();
             TapController = touchButtonController;
             TouchAndHoldController = touchAndHoldButtonController;
@@ -42,15 +100,58 @@ namespace Core.MotorTest.Scripts
             touchButtonController.WaitForInitialize(TouchSensorInitialized);
             touchAndHoldButtonController.WaitForInitialize(TouchAndHoldSensorInitialized);
             crankController.WaitForInitialize(CrankInitialize);
-            // spinWheelEvent.Initialize(this);
-            // quickTimeTapButtonEvent.Initialize(this);
-            //touchAndHoldButtonEvent.Initialize(this);
-            crankQuickTimeEvent.Initialize(this);
         }
 
-        private void StartEventCycle()
+        private void InitializeEvent(QuickTimeEvent quickTimeEvent)
         {
-            crankQuickTimeEvent.PlayEvent();
+            switch (quickTimeEvent)
+            {
+                case IQuickTimeTouchAndHoldButtonEvent:
+                    touchAndHoldButtonEvent.Initialize(new QuickTimeTouchAndHoldButtonEventDependencies(QuickTimeEventCompleted, TouchAndHoldController));
+                    break;
+                case IQuickTimeTapButtonEvent:
+                    quickTimeTapButtonEvent.Initialize(new QuickTimeTapButtonDependencies(QuickTimeEventCompleted, TapController));
+                    break;
+                case ICrankQuickTimeEvent:
+                    crankQuickTimeEvent.Initialize(
+                        new CrankQuickTimeEventDependencies(
+                        QuickTimeEventCompleted, 
+                        15, 
+                        ProvideCrankRange(),
+                        crankController));
+                    break;
+                case IQuickTimeSpinWheelEvent:
+                    spinWheelEvent.Initialize(
+                        new QuickTimeSpinWheelDependencies(
+                            QuickTimeEventCompleted,
+                            waterMillMotorController,
+                            ProvideSpinDirections()));
+                    break;
+            }
+        }
+
+        private int ProvideCrankRange()
+        {
+            var rand = Random.Range(720, 2000);
+            if (rand % 2 == 0) rand *= -1;
+            return rand;
+        }
+
+        private SpinDirections ProvideSpinDirections()
+        {
+            var spinDirectionData = new List<SpinDirectionData>();
+            var random = Random.Range(0, 100);
+                var direction = random > 50 ? SpinDirection.Backward : SpinDirection.Forward;
+                spinDirectionData.Add( new SpinDirectionData(direction, 3));
+            return new SpinDirections(
+            spinDirectionData);
+        }
+        
+        private void ProgressEventCycle()
+        {
+            var quickTimeEvent = eventsToGoThrough[idx];
+            InitializeEvent(quickTimeEvent);
+            quickTimeEvent.PlayEvent();
         }
         
         private void MotorInitialized()
@@ -104,7 +205,7 @@ namespace Core.MotorTest.Scripts
 
         private void StartGame()
         {
-           timer.StartTimer(0.2f, null, StartEventCycle);
+           timer.StartTimer(0.2f, null, ProgressEventCycle);
         }
 
         public IVirtualMill Mill => waterMillMotorController;
@@ -113,11 +214,12 @@ namespace Core.MotorTest.Scripts
         private void QuickTimeEventCompleted(IQuickTimeEventPayload payload)
         {
             Debug.Log($"Completed Event: {payload.Success}");
+            Debug.Log($"Added point value {(payload.Success ? 1: 0)}");
+            idx++;
+            if(idx < eventsToGoThrough.Count)
+                ProgressEventCycle();
+            else 
+                Debug.Log("Game completed");
         }
-        public ISpinWheelInDirectionController SpinWheelController => waterMillMotorController;
-        public SpinDirections DirectionsRequired { get; private set; }
-        public int TimeAllowed => 10;
-        public int RequiredPosition => 720;
-        public ICrankController CrankController => crankController;
     }
 }

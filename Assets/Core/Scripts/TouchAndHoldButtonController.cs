@@ -17,6 +17,7 @@ namespace Core.Scripts
             sensorInitialized = newSensorInitialized;
             actionToSubscribe = (t) => { };
             timer = gameObject.AddComponent<TimerFixedUpdateLoop>();
+            Reset();
         }
 
         public void OnSensorInitialize()

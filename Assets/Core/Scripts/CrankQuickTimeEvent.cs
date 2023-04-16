@@ -42,15 +42,16 @@ namespace Core.Scripts
                 dependencies = newDependencies;
                 dependencies.CrankController.SubscribeToSpinDirectionEvent(CrankCalled);
                 crankTimer = gameObject.AddComponent<TimerFixedUpdateLoop>();
+                cummulativeTargetPosition = 0;
             }
             else throw new ArgumentException("Wrong dependency type given.");
         }
 
         public override void PlayEvent()
         {
-            Debug.Log("Crank it!");
+            Debug.Log($"Crank it! {dependencies.RequiredPosition}");
             cummulativeTargetPosition = 0;
-            crankTimer.StartTimer(dependencies.TimeAllowed, null, EventComplete);
+            crankTimer.StartTimer(dependencies.TimeAllowed, CrankTick, EventComplete);
         }
 
         public override void StopEvent()
@@ -62,6 +63,16 @@ namespace Core.Scripts
         private void CrankCalled(ICrankDirectionPayload payload)
         {
             cummulativeTargetPosition = payload.Position;
+            Debug.Log(cummulativeTargetPosition);
+        }
+
+        private void CrankTick(float t)
+        {
+            if (cummulativeTargetPosition > dependencies.RequiredPosition)
+            {
+                crankTimer.StopTimer();
+                EventComplete();
+            }
         }
         
         private void EventComplete()

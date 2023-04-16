@@ -83,10 +83,8 @@ namespace Core.MotorTest.Scripts
             {
                 direction = SpinDirection.None;
             }
-            Debug.Log(motor.Speed);
             if (IsNotSameDirection(direction))
             {
-                Debug.Log($"Changing Direction: {direction}");
                 currentSpinDirection = direction;
                 actionToSubscribe.Invoke(new SpinDirectionPayload(direction));
             }

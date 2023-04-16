@@ -102,6 +102,7 @@ namespace Core.Scripts
             {
                 dependencies = newDependencies;
                 dependencies.SpinWheelController.SubscribeToSpinDirectionEvent(WheelSpun);
+                idx = 0;
             }
             else throw new ArgumentException("Wrong dependency type given.");
         }
@@ -119,13 +120,15 @@ namespace Core.Scripts
 
         private void DisplayNextSpin(SpinDirectionData directionData)
         {
-            //dependencies.SpinWheelController.SpinInDirection(directionData.TargetDirection == SpinDirection.Backward ? SpinDirection.Forward : SpinDirection.Backward);
-            Debug.Log($"Spin direction: {directionData.TargetDirection}");
+            dependencies.SpinWheelController.StopSpinning();
+            dependencies.SpinWheelController.SpinInDirection(directionData.TargetDirection == SpinDirection.Backward ? SpinDirection.Forward : SpinDirection.Backward);
+            Debug.Log($"Please Spin the wheel: {directionData.TargetDirection}");
         }
 
         private void WheelSpun(ISpinDirectionPayload spinDirectionPayload)
         {
-            dependencies.SpinWheelController.SpinInDirection(spinDirectionPayload.Direction);
+            // dependencies.SpinWheelController.StopSpinning();
+            // dependencies.SpinWheelController.SpinInDirection(spinDirectionPayload.Direction);
             var directionData = dependencies.DirectionsRequired.DirectionsRequired[idx];
             if (directionData.TargetDirection == spinDirectionPayload.Direction)
             {

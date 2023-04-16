@@ -36,6 +36,7 @@ namespace Core.Scripts
             {
                 dependencies = newDependencies;
                 dependencies.TapController.SubscribeToSpinDirectionEvent(ButtonTapped);
+                dependencies.TapController.Reset();
 
             }
             else throw new ArgumentException("Wrong dependency type given.");
