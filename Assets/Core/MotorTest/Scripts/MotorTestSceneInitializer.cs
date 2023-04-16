@@ -112,11 +112,9 @@ namespace Core.MotorTest.Scripts
 
         private void QuickTimeEventCompleted(IQuickTimeEventPayload payload)
         {
-            Debug.Log("Completed Event");
+            Debug.Log($"Completed Event: {payload.Success}");
         }
-
         public ISpinWheelInDirectionController SpinWheelController => waterMillMotorController;
-
         public SpinDirections DirectionsRequired { get; private set; }
         public int TimeAllowed => 10;
         public int RequiredPosition => 720;
